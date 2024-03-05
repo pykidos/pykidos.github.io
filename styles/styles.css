@@ -48,6 +48,11 @@ html {
     /* border-bottom: 1px solid #ccc; */
 }
 
+#code-editor {
+    height: 100%;
+    font-size: 14pt;
+}
+
 .control-panel {
     height: 50px;
     max-height: 50px;
