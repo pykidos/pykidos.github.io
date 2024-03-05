@@ -69,6 +69,11 @@ html {
     font-family: monospace;
 }
 
+
+#terminal-output.error {
+    background-color: #dc7373;
+}
+
 .item {
     display: flex;
     align-items: center;

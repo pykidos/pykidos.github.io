@@ -36,7 +36,14 @@ class Runner {
         if (!this.pyodide) await this.init();
 
         this.outputElement.innerHTML = "";
-        this.pyodide.runPython(code);
+        try {
+            this.pyodide.runPython(code);
+            this.outputElement.classList.remove("error");
+        }
+        catch (error) {
+            this.outputElement.innerHTML = error;
+            this.outputElement.classList.add("error");
+        }
 
         this.dispatcher.spinning(this, false);
     }
