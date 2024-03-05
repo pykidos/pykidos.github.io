@@ -6,20 +6,20 @@
 export const DEFAULT_ROWS = 10;
 export const DEFAULT_COLS = 10;
 
-export const HEADER = `
+export const HEADER = (locale) => `
 import js
 
 grid = js.window.app.grid
-
-def size(n, m):
-    grid.reshape(n, m)
 
 colors = {
     "black": (0, 0, 0),
     "red": (255, 0, 0),
 }
 
-def color(i, j, c):
+def ${locale.size}(n, m):
+    grid.reshape(n, m)
+
+def ${locale.color}(i, j, c):
     col = colors.get(c, None)
     if col:
         grid.bgcolor(i, j, *col)

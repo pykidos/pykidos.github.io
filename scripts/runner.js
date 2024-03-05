@@ -1,4 +1,5 @@
-import { HEADER, FOOTER } from "./constants.js";
+import { FOOTER } from "./constants.js";
+import { getLocalizedHeader } from "./i18.js";
 
 export { Runner };
 
@@ -33,7 +34,7 @@ class Runner {
     }
 
     getHeader() {
-        return HEADER;
+        return getLocalizedHeader();
     }
 
     getFooter() {
