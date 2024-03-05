@@ -40,7 +40,12 @@ class Dispatcher {
     /* Events                                                                                    */
     /*********************************************************************************************/
 
-    toggle(source, idx) {
-        this.emit("toggle", source, { "idx": idx });
+    run(source, code) {
+        this.emit("run", source, { "code": code });
     }
+
+    spinning(source, isSpinning) {
+        this.emit("spinning", source, { "isSpinning": isSpinning });
+    }
+
 };

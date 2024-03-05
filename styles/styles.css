@@ -6,12 +6,18 @@
     left: 0;
 }
 
+body.waiting,
+body.waiting * {
+    cursor: wait !important;
+}
+
 body,
 html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: Roboto, sans-serif;
+    font-size: 12pt;
 }
 
 .container {
@@ -27,7 +33,7 @@ html {
 }
 
 .left-panel {
-    width: 300px;
+    width: 200px;
     flex-shrink: 0;
 }
 
@@ -59,7 +65,7 @@ html {
     overflow: hidden;
 }
 
-.terminal-output {
+#terminal-output {
     font-family: monospace;
 }
 
@@ -75,4 +81,4 @@ html {
     margin-right: 10px;
 }
 
-.grid {}
+#grid {}

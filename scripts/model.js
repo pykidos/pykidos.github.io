@@ -13,17 +13,20 @@ class Model {
         // caches.open('localCache').then((c) => {
         //     this.localCache = c;
         // });
+
+        this.editor = null;
     }
 
     /* Internal                                                                                  */
     /*********************************************************************************************/
 
-    async load() {
-        // let pyodide = await loadPyodide();
-        // console.log(pyodide.runPython(`
-        //         import sys
-        //         sys.version
-        //     `));
-        // pyodide.runPython("print(1 + 2)");
+    async init() {
+        this.editor = ace.edit("code-editor");
+        this.editor.session.setMode("ace/mode/python");
+        // this.editor.setTheme("ace/theme/monokai");
+    }
+
+    getCode() {
+        return this.editor.getValue();
     }
 }

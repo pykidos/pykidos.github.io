@@ -2,8 +2,11 @@ import { Model } from "./model.js";
 import { Dispatcher } from "./dispatcher.js";
 import { State } from "./state.js";
 
-import { Editor } from "./editor.js";
+import { Spinner } from "./spinner.js";
+import { Runner } from "./runner.js";
 import { Grid } from "./grid.js";
+import { Panel } from "./panel.js";
+import { Keyboard } from "./keyboard.js";
 
 export { App };
 
@@ -21,14 +24,15 @@ class App {
         this.dispatcher = new Dispatcher();
 
         // Components.
-        this.editor = new Editor(this.state, this.model, this.dispatcher);
+        this.spinner = new Spinner(this.state, this.model, this.dispatcher);
+        this.runner = new Runner(this.state, this.model, this.dispatcher);
         this.grid = new Grid(this.state, this.model, this.dispatcher);
+        this.panel = new Panel(this.state, this.model, this.dispatcher);
+        this.keyboard = new Keyboard(this.state, this.model, this.dispatcher);
     }
 
     init() {
-        // Load the data.
-        this.model.load().then(async () => {
-            this.editor.init();
+        this.model.init().then(async () => {
         });
     }
 };

@@ -25,20 +25,26 @@
         </div>
 
         <div class="panel middle-panel">
-            <!-- Light code editor placeholder -->
-            <div id="code-editor">print("hello")</div>
+
+            <!-- CODE EDITOR -->
+            <div id="code-editor">print("Hello world!")</div>
+
         </div>
 
         <div class="panel right-panel">
+
+            <!-- GRID -->
             <div class="subpanel">
-                <div class="grid">Grid Placeholder</div>
+                <div id="grid"></div>
             </div>
-            <div class="subpanel terminal-output">
-                Terminal Output Placeholder
-            </div>
+
+            <!-- OUTPUT -->
+            <textarea readonly class="subpanel" id="terminal-output"></textarea>
+
+            <!-- PANEL -->
             <div class="subpanel control-panel">
                 <span>Elapsed Time: 00:00</span>
-                <button>Start</button>
+                <button id="run-button">Start</button>
                 <button>Save</button>
             </div>
         </div>

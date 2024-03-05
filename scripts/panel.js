@@ -1,30 +1,31 @@
-export { Editor };
+export { Panel };
 
 
 /*************************************************************************************************/
-/* Editor                                                                                        */
+/* Panel                                                                                         */
 /*************************************************************************************************/
 
-class Editor {
+class Panel {
     constructor(state, model, dispatcher) {
         this.state = state;
         this.model = model;
         this.dispatcher = dispatcher;
 
+        this.runButton = document.getElementById("run-button");
+
         this.setupDispatcher();
+        this.setupRunButton();
     }
 
-    init() {
-        this.editor = ace.edit("code-editor");
-        // this.editor.setTheme("ace/theme/monokai");
-        this.editor.session.setMode("ace/mode/python");
-
+    async init() {
     }
 
     setupDispatcher() {
     }
 
-    getCode() {
-        return this.editor.getValue();
+    setupRunButton() {
+        this.runButton.addEventListener("click", (e) => {
+            this.dispatcher.run(this, this.model.getCode());
+        });
     }
 };
