@@ -1,3 +1,5 @@
+import { HEADER, FOOTER } from "./constants.js";
+
 export { Runner };
 
 
@@ -30,14 +32,25 @@ class Runner {
         this.dispatcher.on("run", (e) => { this.run(e.code); });
     }
 
+    getHeader() {
+        return HEADER;
+    }
+
+    getFooter() {
+        return FOOTER;
+    }
+
     async run(code) {
         this.dispatcher.spinning(this, true);
 
         if (!this.pyodide) await this.init();
 
-        this.outputElement.textContent = "";
+        let b = "\n\n";
+        let fullCode = this.getHeader() + b + code + b + this.getFooter();
+
         try {
-            this.pyodide.runPython(code);
+            this.outputElement.textContent = "";
+            this.pyodide.runPython(fullCode);
             this.outputElement.classList.remove("error");
         }
         catch (error) {

@@ -26,6 +26,9 @@ class Grid {
     }
 
     reshape(n, m) {
+        this.rows = n;
+        this.cols = m;
+
         // Clear the grid.
         while (this.gridTable.firstChild) {
             this.gridTable.removeChild(this.gridTable.firstChild);
@@ -41,15 +44,17 @@ class Grid {
         }
     }
 
+    cell(i, j) {
+        return this.gridTable.childNodes[i * this.rows + j];
+    }
 
     bgcolor(i, j, r, g, b) {
-        let cell = this.gridTable.rows[i].cells[j].childNodes[0];
+        let cell = this.cell(i, j);
         cell.style.backgroundColor = `rgb(${r},${g},${b})`;
     }
 
     text(i, j, string) {
-        let cell = this.gridTable.rows[i].cells[j].childNodes[0];
-        console.log(cell);
+        let cell = this.cell(i, j);
         cell.textContent = string;
     }
 };
