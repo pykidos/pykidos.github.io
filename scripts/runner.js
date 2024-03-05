@@ -21,7 +21,7 @@ class Runner {
         this.pyodide = await loadPyodide();
         this.pyodide.setStdout({
             batched: (msg) => {
-                this.outputElement.innerHTML += msg + "\n";
+                this.outputElement.textContent += msg + "\n";
             }
         });
     }
@@ -35,13 +35,13 @@ class Runner {
 
         if (!this.pyodide) await this.init();
 
-        this.outputElement.innerHTML = "";
+        this.outputElement.textContent = "";
         try {
             this.pyodide.runPython(code);
             this.outputElement.classList.remove("error");
         }
         catch (error) {
-            this.outputElement.innerHTML = error;
+            this.outputElement.textContent = error;
             this.outputElement.classList.add("error");
         }
 
