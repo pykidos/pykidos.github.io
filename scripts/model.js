@@ -19,5 +19,11 @@ class Model {
     /*********************************************************************************************/
 
     async load() {
+        let pyodide = await loadPyodide();
+        console.log(pyodide.runPython(`
+                import sys
+                sys.version
+            `));
+        pyodide.runPython("print(1 + 2)");
     }
 }
