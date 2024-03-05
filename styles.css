@@ -1,0 +1,65 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Roboto, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.panel {
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.left-panel {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.middle-panel,
+.right-panel {
+    flex-grow: 1;
+    width: 50%;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.subpanel {
+    padding: 0px;
+    flex-grow: 1;
+    /* border-bottom: 1px solid #ccc; */
+}
+
+.control-panel {
+    height: 50px;
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.terminal-output {
+    font-family: monospace;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.grid {}
