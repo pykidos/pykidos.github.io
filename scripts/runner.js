@@ -52,6 +52,9 @@ class Runner {
 
         if (!this.pyodide) await this.init();
 
+        this.reset();
+        this.dispatcher.clear(this);
+
         let b = "\n\n";
         let fullCode = this.getHeader() + b + code + b + this.getFooter();
         let options = { "globals": this.globals };

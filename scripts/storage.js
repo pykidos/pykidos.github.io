@@ -59,14 +59,17 @@ class Storage {
     }
 
     count() {
-        return localStorage.getItem('listingsCount') || 0;
+        return localStorage.length;
     }
 
     new() {
-        const listingsCount = this.count();
-        const newName = `untitled ${listingsCount}`;
+        let index = 0;
+        let newName;
+        do {
+            newName = `untitled ${index}`;
+            index++;
+        } while (localStorage.getItem(newName) !== null);
         localStorage.setItem(newName, '');
-        localStorage.setItem('listingsCount', parseInt(listingsCount) + 1);
         return newName;
     }
 
@@ -85,9 +88,9 @@ class Storage {
     }
 
     first() {
-        const listingNames = Object.keys(localStorage);
-        if (listingNames.length > 0) {
-            const firstName = listingNames[0];
+        const names = Object.keys(localStorage);
+        if (names.length > 0) {
+            const firstName = names[0];
             const code = localStorage.getItem(firstName);
             this.dispatcher.select(this, firstName, code);
         }
@@ -104,12 +107,11 @@ class Storage {
     }
 
     list(order) {
-        const listingNames = Object.keys(localStorage);
-        const filteredNames = listingNames.filter(name => name !== 'listingsCount');
+        const names = Object.keys(localStorage);
         if (order === 'desc') {
-            return filteredNames.sort().reverse();
+            return names.sort().reverse();
         } else {
-            return filteredNames.sort();
+            return names.sort();
         }
     }
 

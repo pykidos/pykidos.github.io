@@ -25,6 +25,7 @@ class Grid {
     }
 
     setupDispatcher() {
+        this.dispatcher.on("clear", (e) => { this.clear(); });
     }
 
     reshape(n, m) {
