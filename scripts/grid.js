@@ -51,8 +51,8 @@ class Grid {
     }
 
     cell(i, j) {
-        // i = clamp(i, 0, this.rows - 1);
-        // j = clamp(j, 0, this.cols - 1);
+        i = Math.floor(i);
+        j = Math.floor(j);
         if (0 <= i && i < this.rows && 0 <= j && j < this.cols)
             return this.gridTable.childNodes[i * this.rows + j];
     }

@@ -15,12 +15,15 @@ class Runner {
         this.dispatcher = dispatcher;
 
         this.pyodide = null;
+        this.globals = null;
+        this.isPlaying = false;
         this.outputElement = document.getElementById("terminal-output");
 
         this.setupDispatcher();
     }
 
     reset() {
+        if (!this.pyodide) return
         this.globals = this.pyodide.toPy({});
     }
 
@@ -37,6 +40,8 @@ class Runner {
     setupDispatcher() {
         this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
+        this.dispatcher.on("play", (e) => { this.play(e.code); });
+        this.dispatcher.on("stop", (e) => { this.stop(); });
     }
 
     getHeader() {
@@ -47,21 +52,27 @@ class Runner {
         return FOOTER;
     }
 
-    async run(code) {
+    async run(code, reset = true, addHeader = true, addFooter = true) {
         this.dispatcher.spinning(this, true);
 
         if (!this.pyodide) await this.init();
 
-        this.reset();
-        this.dispatcher.clear(this);
+        if (reset) {
+            this.reset();
+            this.dispatcher.clear(this);
+        }
 
         let b = "\n\n";
-        let fullCode = this.getHeader() + b + code + b + this.getFooter();
+        let fullCode = (
+            addHeader ? this.getHeader() : '') +
+            b + code + b +
+            (addFooter ? this.getFooter() : '');
         let options = { "globals": this.globals };
+        let out = null;
 
         try {
             this.outputElement.textContent = "";
-            this.pyodide.runPython(fullCode, options);
+            out = await this.pyodide.runPython(fullCode, options);
             this.outputElement.classList.remove("error");
         }
         catch (error) {
@@ -70,9 +81,28 @@ class Runner {
         }
 
         this.dispatcher.spinning(this, false);
+        return out;
+    }
+
+    async frame(i) {
+        let out = await this.run(`frame(${i})`, false, false, false);
+        if (this.isPlaying && out != false)
+            setTimeout(() => { this.frame(i + 1); }, 100);
     }
 
     async play(code) {
-        this.run(code);
+        if (this.isPlaying) return;
+        await this.run(code);
+
+        if (this.globals) {
+            if (this.globals.toJs().get("frame")) {
+                this.isPlaying = true;
+                this.frame(0);
+            }
+        }
+    }
+
+    stop() {
+        this.isPlaying = false;
     }
 };
