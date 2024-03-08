@@ -40,6 +40,10 @@ class Dispatcher {
     /* Events                                                                                    */
     /*********************************************************************************************/
 
+    clear(source) {
+        this.emit("clear", source);
+    }
+
     run(source, code) {
         this.emit("run", source, { "code": code });
     }

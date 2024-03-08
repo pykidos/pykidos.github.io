@@ -20,8 +20,13 @@ class Runner {
         this.setupDispatcher();
     }
 
+    reset() {
+        this.globals = this.pyodide.toPy({});
+    }
+
     async init() {
         this.pyodide = await loadPyodide();
+        this.reset();
         this.pyodide.setStdout({
             batched: (msg) => {
                 this.outputElement.textContent += msg + "\n";
@@ -30,6 +35,7 @@ class Runner {
     }
 
     setupDispatcher() {
+        this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
     }
 
@@ -48,10 +54,11 @@ class Runner {
 
         let b = "\n\n";
         let fullCode = this.getHeader() + b + code + b + this.getFooter();
+        let options = { "globals": this.globals };
 
         try {
             this.outputElement.textContent = "";
-            this.pyodide.runPython(fullCode);
+            this.pyodide.runPython(fullCode, options);
             this.outputElement.classList.remove("error");
         }
         catch (error) {
