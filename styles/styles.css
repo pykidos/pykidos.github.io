@@ -155,3 +155,24 @@ html {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+
+
+
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-panel button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.control-panel button:hover {
+    color: #007bff;
+}

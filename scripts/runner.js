@@ -23,6 +23,7 @@ class Runner {
     }
 
     reset() {
+        this.isPlaying = false;
         if (!this.pyodide) return
         this.globals = this.pyodide.toPy({});
     }
@@ -40,7 +41,6 @@ class Runner {
     setupDispatcher() {
         this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
-        this.dispatcher.on("play", (e) => { this.play(e.code); });
         this.dispatcher.on("stop", (e) => { this.stop(); });
     }
 
@@ -52,7 +52,7 @@ class Runner {
         return FOOTER;
     }
 
-    async run(code, reset = true, addHeader = true, addFooter = true) {
+    async _run(code, reset = true, addHeader = true, addFooter = true) {
         this.dispatcher.spinning(this, true);
 
         if (!this.pyodide) await this.init();
@@ -85,20 +85,36 @@ class Runner {
     }
 
     async frame(i) {
-        let out = await this.run(`frame(${i})`, false, false, false);
-        if (this.isPlaying && out != false)
+        if (!this.isPlaying) return;
+
+        let out = await this._run(`frame(${i})`, false, false, false);
+        if (out != false)
             setTimeout(() => { this.frame(i + 1); }, 100);
     }
 
-    async play(code) {
-        if (this.isPlaying) return;
-        await this.run(code);
+    _hasFrame() {
+        return this.globals && this.globals.toJs().get("frame");
+    }
 
-        if (this.globals) {
-            if (this.globals.toJs().get("frame")) {
+    async run(code) {
+        // this.stop();
+        // this.reset();
+        // this.dispatcher.clear(this);
+        if (this.isPlaying) return;
+
+        // if (!this._hasFrame)
+        await this._run(code);
+
+        // If there is a "frame" function, call it for animation.
+        if (this._hasFrame()) {
+            if (!this.isPlaying) {
                 this.isPlaying = true;
                 this.frame(0);
             }
+        }
+        // Otherwise, normal run.
+        else {
+            return this._run(code);
         }
     }
 

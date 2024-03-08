@@ -56,10 +56,6 @@ class Dispatcher {
         this.emit("delete", source, { "name": name });
     }
 
-    play(source, code) {
-        this.emit("play", source, { "code": code });
-    }
-
     stop(source) {
         this.emit("stop", source);
     }

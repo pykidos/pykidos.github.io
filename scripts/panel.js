@@ -13,14 +13,12 @@ class Panel {
 
         this.clearButton = document.getElementById("clear-button");
         this.runButton = document.getElementById("run-button");
-        this.playButton = document.getElementById("play-button");
         this.stopButton = document.getElementById("stop-button");
 
         this.setupDispatcher();
 
         this.setupClearButton();
         this.setupRunButton();
-        this.setupPlayButton();
         this.setupStopButton();
     }
 
@@ -39,12 +37,6 @@ class Panel {
     setupRunButton() {
         this.runButton.addEventListener("click", (e) => {
             this.dispatcher.run(this, this.model.getCode());
-        });
-    }
-
-    setupPlayButton() {
-        this.playButton.addEventListener("click", (e) => {
-            this.dispatcher.play(this, this.model.getCode());
         });
     }
 
