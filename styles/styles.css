@@ -74,6 +74,10 @@ html {
     background-color: #dc7373;
 }
 
+#new-item {
+    background-color: #eee;
+}
+
 .item {
     display: flex;
     align-items: center;
@@ -81,6 +85,11 @@ html {
     border: 1px solid #aaa;
     padding: 10px;
     margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.item:hover {
+    background-color: #eee;
 }
 
 .icon {

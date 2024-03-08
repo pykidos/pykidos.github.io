@@ -44,8 +44,20 @@ class Dispatcher {
         this.emit("clear", source);
     }
 
+    new(source) {
+        this.emit("new", source, {});
+    }
+
     run(source, code) {
         this.emit("run", source, { "code": code });
+    }
+
+    select(source, name) {
+        this.emit("select", source, { "name": name });
+    }
+
+    setNames(source, names, name) {
+        this.emit("setNames", source, { "names": names, "name": name });
     }
 
     spinning(source, isSpinning) {

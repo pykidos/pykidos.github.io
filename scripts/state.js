@@ -7,7 +7,7 @@ export { State };
 /* Defaults                                                                                      */
 /*************************************************************************************************/
 
-const DEFAULT_PARAM = 42;
+const DEFAULT_PARAM = "untitled 0";
 
 
 
@@ -64,7 +64,7 @@ class State {
     }
 
     init(state) {
-        this.param = state.param || DEFAULT_PARAM;
+        this.name = state.name || DEFAULT_PARAM;
     }
 
     reset() {

@@ -14,11 +14,44 @@ class Storage {
         this.setupDispatcher();
     }
 
+    init() {
+        if (this.count() == 0) {
+            this.new();
+        }
+    }
+
     setupDispatcher() {
+        this.dispatcher.on("select", (e) => {
+            try {
+                let code = this.retrieve(e.name);
+                this.model.setCode(code);
+                this.state.name = e.name;
+            }
+            catch (err) {
+                console.warn(`Code listing ${e.name} not found.`);
+            }
+        });
+
+        // Save on run.
+        this.dispatcher.on("run", (e) => {
+            let code = this.model.getCode();
+            this.save(this.state.name, code);
+        });
+
+        // Request a new listing.
+        this.dispatcher.on("new", (e) => {
+            let name = this.new();
+            // The selector will update the list of names with this and will raise a new select event.
+            this.dispatcher.setNames(this, this.list(), name);
+        });
+    }
+
+    count() {
+        return localStorage.getItem('listingsCount') || 0;
     }
 
     new() {
-        const listingsCount = localStorage.getItem('listingsCount') || 0;
+        const listingsCount = this.count();
         const newName = `untitled ${listingsCount}`;
         localStorage.setItem(newName, '');
         localStorage.setItem('listingsCount', parseInt(listingsCount) + 1);
