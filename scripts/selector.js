@@ -64,7 +64,8 @@ class Selector {
         deleteButton.textContent = '🗑️';
         deleteButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.delete(name);
+            if (window.confirm(`delete ${name}?`))
+                this.delete(name);
         });
         item.appendChild(deleteButton);
 
