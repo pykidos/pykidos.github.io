@@ -17,7 +17,9 @@ class Grid {
 
         this.grid = document.getElementById('grid');
         this.gridTable = document.getElementById('grid-table');
-        this.reshape(DEFAULT_ROWS, DEFAULT_COLS);
+        this.rows = DEFAULT_ROWS;
+        this.cols = DEFAULT_COLS;
+        this.reshape(this.rows, this.cols);
 
         this.setupDispatcher();
     }
@@ -50,11 +52,51 @@ class Grid {
 
     bgcolor(i, j, r, g, b) {
         let cell = this.cell(i, j);
-        cell.style.backgroundColor = `rgb(${r},${g},${b})`;
+        cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 
     text(i, j, string) {
         let cell = this.cell(i, j);
         cell.textContent = string;
+    }
+
+    fill(r, g, b) {
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.bgcolor(i, j, r, g, b);
+            }
+        }
+    }
+
+    clear() {
+        this.fill(255, 255, 255);
+    }
+
+    line(i, r, g, b) {
+        for (let j = 0; j < this.cols; j++) {
+            this.bgcolor(i, j, r, g, b);
+        }
+    }
+
+    column(j, r, g, b) {
+        for (let i = 0; i < this.rows; i++) {
+            this.bgcolor(i, j, r, g, b);
+        }
+    }
+
+    diagonal(k, r, g, b) {
+        for (let i = 0; i < Math.min(this.rows, this.cols); i++) {
+            if (i + k < this.rows && i + k < this.cols) {
+                this.bgcolor(i + k, i + k, r, g, b);
+            }
+        }
+    }
+
+    block(i0, j0, i1, j1, r, g, b) {
+        for (let i = i0; i < i1; i++) {
+            for (let j = j0; j < j1; j++) {
+                this.bgcolor(i, j, r, g, b);
+            }
+        }
     }
 };

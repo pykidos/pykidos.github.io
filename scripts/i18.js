@@ -10,6 +10,13 @@ export const LOCALIZATION = {
     {
         "size": "taille",
         "color": "couleur",
+        "fill": "remplir",
+        "clear": "effacer",
+        "line": "ligne",
+        "column": "colonne",
+        "diagonal": "diagonale",
+        "block": "bloc",
+
         "black": "noir",
         "red": "rouge",
         "green": "vert",

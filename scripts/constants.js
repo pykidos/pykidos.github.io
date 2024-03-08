@@ -22,6 +22,25 @@ def ${locale.size}(n, m):
 
 def ${locale.color}(i, j, col):
     grid.bgcolor(i, j, *col)
+
+def ${locale.fill}(col):
+    grid.fill(*col)
+
+def ${locale.clear}():
+    grid.clear()
+
+def ${locale.line}(i, col):
+    grid.line(i, *col)
+
+def ${locale.column}(j, col):
+    grid.column(j, *col)
+
+def ${locale.diagonal}(k, col):
+    grid.diagonal(k, *col)
+
+def ${locale.block}(i0, j0, i1, j1, col):
+    grid.block(i0, j0, i1, j1, *col)
+
 `;
 
 // HACK: this is to force the sys.stdout to be flushed.
