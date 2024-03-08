@@ -6,28 +6,36 @@ import { HEADER } from "./constants.js";
 /*************************************************************************************************/
 
 export const LOCALIZATION = {
-    "en":
-    {
-        "size": "size",
-        "color": "color"
-    },
     "fr":
     {
         "size": "taille",
-        "color": "couleur"
+        "color": "couleur",
+        "black": "noir",
+        "red": "rouge",
+        "green": "vert",
+        "blue": "bleu",
+        "yellow": "jaune",
     }
 };
 
 
-export function getLocalizedHeader() {
+export function getLocale() {
     let lang = navigator.language.split('-')[0];
 
-    // DEBUG: force english
+    // DEBUG: force EN for now.
     lang = "en";
 
     let locale = LOCALIZATION[lang];
-    if (!locale) locale = LOCALIZATION["en"];
-    console.assert(locale);
-
-    return HEADER(locale);
+    if (!locale) {
+        locale = {};
+        // Create "X": "X" for the default "en" language.
+        const frKeys = Object.keys(LOCALIZATION.fr);
+        frKeys.forEach(key => {
+            locale[key] = key;
+        });
+    }
+    return locale;
 }
+
+
+export const LOCALE = getLocale();

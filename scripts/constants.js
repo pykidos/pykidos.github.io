@@ -11,19 +11,22 @@ import js
 
 grid = js.window.app.grid
 
-colors = {
-    "black": (0, 0, 0),
-    "red": (255, 0, 0),
-}
+${locale.black} = (0, 0, 0)
+${locale.red} = (255, 0, 0)
+${locale.green} = (0, 255, 0)
+${locale.blue} = (0, 0, 255)
+${locale.yellow} = (255, 255, 0)
 
 def ${locale.size}(n, m):
     grid.reshape(n, m)
 
-def ${locale.color}(i, j, c):
-    col = colors.get(c, None)
-    if col:
-        grid.bgcolor(i, j, *col)
+def ${locale.color}(i, j, col):
+    grid.bgcolor(i, j, *col)
 `;
 
 // HACK: this is to force the sys.stdout to be flushed.
 export const FOOTER = `print("\\n")\n`;
+
+export const DEFAULT_CODE = (locale) => `for i in range(${DEFAULT_ROWS}):
+    ${locale.color}(i, i, ${locale.red})
+`;
