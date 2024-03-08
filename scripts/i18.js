@@ -10,6 +10,8 @@ export const LOCALIZATION = {
     {
         "size": "taille",
         "color": "couleur",
+        "text": "texte",
+
         "fill": "remplir",
         "clear": "effacer",
         "line": "ligne",

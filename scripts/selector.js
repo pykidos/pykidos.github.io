@@ -89,6 +89,14 @@ class Selector {
     select(name) {
         if (!name) return;
         console.log(`Select code listing "${name}".`);
+
+        for (let child of this.el.childNodes) {
+            if (child.childNodes[0].innerHTML != name)
+                child.classList.remove('selected');
+            else
+                child.classList.add('selected');
+        }
+
         this.dispatcher.select(this, name);
     }
 

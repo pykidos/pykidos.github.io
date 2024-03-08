@@ -23,6 +23,9 @@ def ${locale.size}(n, m):
 def ${locale.color}(i, j, col):
     grid.bgcolor(i, j, *col)
 
+def ${locale.text}(i, j, text):
+    grid.text(i, j, text)
+
 def ${locale.fill}(col):
     grid.fill(*col)
 
