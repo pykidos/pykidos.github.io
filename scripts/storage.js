@@ -38,12 +38,24 @@ class Storage {
             this.save(this.state.name, code);
         });
 
-        // Request a new listing.
         this.dispatcher.on("new", (e) => {
-            let name = this.new();
-            // The selector will update the list of names with this and will raise a new select event.
-            this.dispatcher.setNames(this, this.list(), name);
+            this.updateSelector(this.new());
         });
+
+        this.dispatcher.on("rename", (e) => {
+            this.rename(e.oldName, e.newName);
+            this.updateSelector(e.newName);
+        });
+
+        this.dispatcher.on("delete", (e) => {
+            this.delete(e.name);
+            this.updateSelector(this.first());
+        });
+    }
+
+    updateSelector(name) {
+        // The selector will update the list of names with this and will raise a new select event.
+        this.dispatcher.setNames(this, this.list(), name);
     }
 
     count() {
@@ -72,11 +84,21 @@ class Storage {
         localStorage.setItem(name, code);
     }
 
+    first() {
+        const listingNames = Object.keys(localStorage);
+        if (listingNames.length > 0) {
+            const firstName = listingNames[0];
+            const code = localStorage.getItem(firstName);
+            this.dispatcher.select(this, firstName, code);
+        }
+    }
+
     retrieve(name) {
         const listing = localStorage.getItem(name);
         if (listing !== null) {
             return listing;
-        } else {
+        }
+        else {
             throw new Error(`Listing "${name}" not found.`);
         }
     }
@@ -89,5 +111,9 @@ class Storage {
         } else {
             return filteredNames.sort();
         }
+    }
+
+    delete(name) {
+        localStorage.removeItem(name);
     }
 };

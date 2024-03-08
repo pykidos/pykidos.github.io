@@ -50,19 +50,22 @@ class Grid {
     }
 
     cell(i, j) {
-        i = clamp(i, 0, this.rows - 1);
-        j = clamp(j, 0, this.cols - 1);
-        return this.gridTable.childNodes[i * this.rows + j];
+        // i = clamp(i, 0, this.rows - 1);
+        // j = clamp(j, 0, this.cols - 1);
+        if (0 <= i && i < this.rows && 0 <= j && j < this.cols)
+            return this.gridTable.childNodes[i * this.rows + j];
     }
 
     bgcolor(i, j, r, g, b) {
         let cell = this.cell(i, j);
-        cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        if (cell)
+            cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 
     text(i, j, string) {
         let cell = this.cell(i, j);
-        cell.textContent = string;
+        if (cell)
+            cell.textContent = string;
     }
 
     fill(r, g, b) {

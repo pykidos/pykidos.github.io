@@ -48,6 +48,14 @@ class Dispatcher {
         this.emit("new", source, {});
     }
 
+    rename(source, oldName, newName) {
+        this.emit("rename", source, { "oldName": oldName, "newName": newName });
+    }
+
+    delete(source, name) {
+        this.emit("delete", source, { "name": name });
+    }
+
     run(source, code) {
         this.emit("run", source, { "code": code });
     }

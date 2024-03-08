@@ -75,12 +75,13 @@ html {
 }
 
 #new-item {
-    background-color: #eee;
+    /* background-color: #eee; */
 }
 
 .item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 30px;
     border: 1px solid #aaa;
     padding: 10px;
@@ -88,8 +89,20 @@ html {
     cursor: pointer;
 }
 
+.item span {
+    flex: 1;
+    /* Text takes as much space as possible */
+}
+
 .item:hover {
     background-color: #eee;
+}
+
+.item button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
 }
 
 .icon {

@@ -35,13 +35,38 @@ class Selector {
         });
     }
 
+    _createItem(name) {
+        const item = document.createElement('div');
+        item.classList.add('item');
+
+        const itemName = document.createElement('span');
+        itemName.textContent = name;
+        item.appendChild(itemName);
+
+        const renameButton = document.createElement('button');
+        renameButton.textContent = '✏️';
+        renameButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.rename(name, window.prompt("new name?", name));
+        });
+        item.appendChild(renameButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '🗑️';
+        deleteButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.delete(name);
+        });
+        item.appendChild(deleteButton);
+
+        return item;
+    }
+
     setNames(names) {
         this.el.innerHTML = '';
 
         names.forEach(name => {
-            const item = document.createElement('div');
-            item.classList.add('item');
-            item.textContent = name;
+            const item = this._createItem(name);
             item.addEventListener('click', () => this.select(name));
             this.el.appendChild(item);
         });
@@ -50,5 +75,16 @@ class Selector {
     select(name) {
         console.log(`Select code listing "${name}".`);
         this.dispatcher.select(this, name);
+    }
+
+    rename(oldName, newName) {
+        if (!newName) return;
+        console.log(`Rename code listing from "${oldName}" to "${newName}".`);
+        this.dispatcher.rename(this, oldName, newName);
+    }
+
+    delete(name) {
+        console.log(`Delete code listing "${name}".`);
+        this.dispatcher.delete(this, name);
     }
 };
