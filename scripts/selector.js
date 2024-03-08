@@ -14,18 +14,25 @@ class Selector {
         this.el = document.getElementById("selector");
         this.newButton = document.getElementById("new-item");
 
+        this.names = [];
         this.setupDispatcher();
         this.setupNewButton();
     }
 
     init() {
-        this.select(this.state.name);
+        // if (this.state.name != undefined && this.names.includes(this.state.name)) {
+        //     console.log("a");
+        //     this.select(this.state.name);
+        // }
+        // else if (this.names.length > 0) {
+        //     console.log("b");
+        //     this.select(this.names[0]);
+        // }
     }
 
     setupDispatcher() {
         this.dispatcher.on("setNames", (e) => {
-            this.setNames(e.names);
-            this.select(e.name);
+            this.setNames(e.names, e.name);
         });
     }
 
@@ -35,9 +42,11 @@ class Selector {
         });
     }
 
-    _createItem(name) {
+    _createItem(name, selected) {
         const item = document.createElement('div');
         item.classList.add('item');
+        if (selected)
+            item.classList.add('selected');
 
         const itemName = document.createElement('span');
         itemName.textContent = name;
@@ -62,17 +71,22 @@ class Selector {
         return item;
     }
 
-    setNames(names) {
+    setNames(names, selectedName) {
         this.el.innerHTML = '';
+        this.names = names;
 
         names.forEach(name => {
-            const item = this._createItem(name);
+            const item = this._createItem(name, name == selectedName);
             item.addEventListener('click', () => this.select(name));
             this.el.appendChild(item);
         });
+
+        if (selectedName)
+            this.select(selectedName);
     }
 
     select(name) {
+        if (!name) return;
         console.log(`Select code listing "${name}".`);
         this.dispatcher.select(this, name);
     }

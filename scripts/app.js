@@ -41,9 +41,9 @@ class App {
             this.storage.init();
             this.selector.init();
 
-            // Initialize the list of code listings.
-            let names = this.storage.list();
-            this.selector.setNames(names);
+            // // Initialize the list of code listings.
+            // let names = this.storage.list();
+            // this.selector.setNames(names);
         });
     }
 };

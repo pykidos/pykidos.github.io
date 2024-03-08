@@ -18,6 +18,7 @@ class Storage {
         if (this.count() == 0) {
             this.new();
         }
+        this.updateSelector(this.first());
     }
 
     setupDispatcher() {
@@ -90,9 +91,7 @@ class Storage {
     first() {
         const names = Object.keys(localStorage);
         if (names.length > 0) {
-            const firstName = names[0];
-            const code = localStorage.getItem(firstName);
-            this.dispatcher.select(this, firstName, code);
+            return names[0];
         }
     }
 

@@ -71,4 +71,8 @@ class Runner {
 
         this.dispatcher.spinning(this, false);
     }
+
+    async play(code) {
+        this.run(code);
+    }
 };
