@@ -36,10 +36,13 @@ class Grid {
             this.gridTable.removeChild(this.gridTable.firstChild);
         }
 
+        // HACK: found an adequate grid width in "vmin" unit by trial and error.
         let k = clamp((60.0 * m) / n, 1, 60);
         this.grid.style.width = `${k}vmin`;
+
         this.gridTable.style.gridTemplateColumns = `repeat(${m}, 1fr)`;
         this.gridTable.style.gridTemplateRows = `repeat(${n}, 1fr)`;
+
         for (let i = 0; i < n * m; i++) {
             let cell = document.createElement('div');
             this.gridTable.appendChild(cell);
@@ -47,6 +50,8 @@ class Grid {
     }
 
     cell(i, j) {
+        i = clamp(i, 0, this.rows - 1);
+        j = clamp(j, 0, this.cols - 1);
         return this.gridTable.childNodes[i * this.rows + j];
     }
 
