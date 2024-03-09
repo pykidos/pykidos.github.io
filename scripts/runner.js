@@ -42,6 +42,7 @@ class Runner {
         this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
         this.dispatcher.on("stop", (e) => { this.stop(); });
+        this.dispatcher.on("click", (e) => { this.click(e.row, e.col); });
     }
 
     getHeader() {
@@ -92,21 +93,21 @@ class Runner {
             setTimeout(() => { this.frame(i + 1); }, 100);
     }
 
-    _hasFrame() {
-        return this.globals && this.globals.toJs().get("frame");
+    get(varName) {
+        return this.globals ? this.globals.toJs().get(varName) : null;
+    }
+
+    has(varName) {
+        return this.get(varName) != null;
     }
 
     async run(code) {
-        // this.stop();
-        // this.reset();
-        // this.dispatcher.clear(this);
         if (this.isPlaying) return;
 
-        // if (!this._hasFrame)
         await this._run(code);
 
         // If there is a "frame" function, call it for animation.
-        if (this._hasFrame()) {
+        if (this.has("frame")) {
             if (!this.isPlaying) {
                 this.isPlaying = true;
                 this.frame(0);
@@ -120,5 +121,10 @@ class Runner {
 
     stop() {
         this.isPlaying = false;
+    }
+
+    click(row, col) {
+        if (this.has("click"))
+            this._run(`click(${row}, ${col})`, false, false, false);
     }
 };

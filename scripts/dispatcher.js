@@ -76,4 +76,7 @@ class Dispatcher {
         this.emit("spinning", source, { "isSpinning": isSpinning });
     }
 
+    click(source, i, j) {
+        this.emit("click", source, { "row": i, "col": j });
+    }
 };

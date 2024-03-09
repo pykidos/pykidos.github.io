@@ -46,6 +46,11 @@ class Grid {
 
         for (let i = 0; i < n * m; i++) {
             let cell = document.createElement('div');
+            cell.addEventListener("click", (e) => {
+                let row = Math.floor(i / n);
+                let col = i % n;
+                this.dispatcher.click(this, row, col);
+            });
             this.gridTable.appendChild(cell);
         }
     }
