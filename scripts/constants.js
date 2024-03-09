@@ -5,6 +5,7 @@
 
 export const DEFAULT_ROWS = 10;
 export const DEFAULT_COLS = 10;
+export const DEFAULT_INTERVAL = .1;
 
 export const HEADER = (locale) => `
 import js

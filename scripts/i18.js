@@ -11,6 +11,7 @@ export const LOCALIZATION = {
         "size": "taille",
         "color": "couleur",
         "text": "texte",
+        "interval": "intervalle",
 
         "fill": "remplir",
         "clear": "effacer",

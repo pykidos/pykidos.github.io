@@ -1,4 +1,4 @@
-import { HEADER, FOOTER } from "./constants.js";
+import { HEADER, FOOTER, DEFAULT_INTERVAL } from "./constants.js";
 import { LOCALE } from "./i18.js";
 
 export { Runner };
@@ -18,6 +18,8 @@ class Runner {
         this.globals = null;
         this.isPlaying = false;
         this.outputElement = document.getElementById("terminal-output");
+
+        this.interval = DEFAULT_INTERVAL;
 
         this.setupDispatcher();
     }
@@ -81,6 +83,9 @@ class Runner {
             this.outputElement.classList.add("error");
         }
 
+        let interval = this.get(LOCALE['interval']);
+        if (interval) this.interval = interval;
+
         this.dispatcher.spinning(this, false);
         return out;
     }
@@ -90,7 +95,7 @@ class Runner {
 
         let out = await this._run(`frame(${i})`, false, false, false);
         if (out != false)
-            setTimeout(() => { this.frame(i + 1); }, 100);
+            setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
     }
 
     get(varName) {
