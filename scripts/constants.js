@@ -12,6 +12,7 @@ import js
 grid = js.window.app.grid
 
 ${locale.black} = (0, 0, 0)
+${locale.white} = (255, 255, 255)
 ${locale.red} = (255, 0, 0)
 ${locale.green} = (0, 255, 0)
 ${locale.blue} = (0, 0, 255)

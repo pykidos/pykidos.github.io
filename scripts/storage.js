@@ -1,3 +1,6 @@
+import { DEFAULT_CODE } from "./constants.js";
+import { LOCALE } from "./i18.js";
+
 export { Storage };
 
 
@@ -70,7 +73,7 @@ class Storage {
             newName = `untitled ${index}`;
             index++;
         } while (localStorage.getItem(newName) !== null);
-        localStorage.setItem(newName, '');
+        localStorage.setItem(newName, DEFAULT_CODE(LOCALE));
         return newName;
     }
 
