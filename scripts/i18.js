@@ -25,6 +25,7 @@ export const LOCALIZATION = {
         "green": "vert",
         "blue": "bleu",
         "yellow": "jaune",
+        "orange": "orange",
     }
 };
 
@@ -33,7 +34,7 @@ export function getLocale() {
     let lang = navigator.language.split('-')[0];
 
     // DEBUG: force EN for now.
-    lang = "en";
+    // lang = "en";
 
     let locale = LOCALIZATION[lang];
     if (!locale) {

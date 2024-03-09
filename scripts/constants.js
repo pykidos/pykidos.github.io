@@ -17,6 +17,7 @@ ${locale.red} = (255, 0, 0)
 ${locale.green} = (0, 255, 0)
 ${locale.blue} = (0, 0, 255)
 ${locale.yellow} = (255, 255, 0)
+${locale.orange} = (255, 100, 0)
 
 def ${locale.size}(n, m):
     grid.reshape(n, m)
