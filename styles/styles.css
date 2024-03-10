@@ -69,6 +69,10 @@ emoji-picker.visible {
     display: block;
 }
 
+#color-button {
+    width: 22px;
+}
+
 #code-editor {
     height: 100%;
     font-size: 10pt;

@@ -32,6 +32,20 @@ class Model {
         this.emojiPicker.addEventListener('focusout', (e) => {
             this.emojiPicker.classList.remove("visible");
         });
+
+
+        Coloris({
+            alpha: false,
+            closeButton: true,
+            closeLabel: 'Insert',
+            format: 'rgb',
+            themeMode: 'light',
+        })
+        this.colorButton = document.getElementById("color-button");
+        this.colorButton.addEventListener('change', (e) => {
+            const color = e.target.value.substring(3);
+            this.editor.insert(color);
+        });
     }
 
     /* Internal                                                                                  */

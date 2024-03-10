@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PyKidos</title>
+
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <script type="module" src="scripts/main.js"></script>
 </head>
 
@@ -25,7 +29,9 @@
 
         <div class="panel middle-panel">
             <div id="buttons-bar">
-                <a href="#" id="emoji-button">Emoji</a>
+                <a href="#" id="emoji-button">Emoji</a> —
+                <input type="text" data-coloris id="color-button" value="rgb(0,0,0)">
+
                 <emoji-picker id="emoji-picker" class="light"></emoji-picker>
             </div>
 
