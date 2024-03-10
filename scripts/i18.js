@@ -23,6 +23,7 @@ export const LOCALIZATION = {
 
         "black": "noir",
         "white": "blanc",
+        "gray": "gris",
         "red": "rouge",
         "green": "vert",
         "blue": "bleu",

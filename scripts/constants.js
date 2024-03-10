@@ -14,6 +14,8 @@ grid = js.window.app.grid
 
 ${locale.black} = (0, 0, 0)
 ${locale.white} = (255, 255, 255)
+def ${locale.gray}(level=128):
+    return (level, level, level)
 
 # ${locale.red} = (255, 0, 0)
 # ${locale.green} = (0, 255, 0)
@@ -48,6 +50,7 @@ def ${locale.size}(n, m):
     grid.reshape(n, m)
 
 def ${locale.color}(i, j, col):
+    if callable(col): col = col()
     grid.bgcolor(i, j, *col)
 
 def ${locale.text}(i, j, text):

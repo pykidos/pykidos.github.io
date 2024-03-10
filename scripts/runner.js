@@ -81,6 +81,7 @@ class Runner {
         catch (error) {
             this.outputElement.textContent = error;
             this.outputElement.classList.add("error");
+            out = false;
         }
 
         let interval = this.get(LOCALE['interval']);
