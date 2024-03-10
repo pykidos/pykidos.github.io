@@ -26,7 +26,7 @@ class Grid {
     }
 
     setupKeyboard() {
-        this.gridTable.addEventListener("keyup", (e) => {
+        this.gridTable.addEventListener("keydown", (e) => {
             this.dispatcher.keyboard(this, e.key);
         });
     }
@@ -64,6 +64,8 @@ class Grid {
             this.dispatcher.click(this, row, col);
         });
         cell.title = `${row}, ${col}`;
+        let size = cell.width;
+        cell.style.fontSize = `calc((95vw - 300px) / (2 * ${this.rows}))`;
         this.gridTable.appendChild(cell);
     }
 
@@ -96,6 +98,12 @@ class Grid {
 
     clear() {
         this.fill(255, 255, 255);
+
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.text(i, j, "");
+            }
+        }
     }
 
     line(i, r, g, b) {
