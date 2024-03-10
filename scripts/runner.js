@@ -63,6 +63,7 @@ class Runner {
         if (reset) {
             this.reset();
             this.dispatcher.clear(this);
+            this.outputElement.textContent = "";
         }
 
         let b = "\n\n";
@@ -74,7 +75,6 @@ class Runner {
         let out = null;
 
         try {
-            this.outputElement.textContent = "";
             out = await this.pyodide.runPython(fullCode, options);
             this.outputElement.classList.remove("error");
         }
@@ -109,7 +109,7 @@ class Runner {
     async run(code) {
         if (this.isPlaying) return;
 
-        await this._run(code);
+        let out = await this._run(code);
 
         // If there is a "frame" function, call it for animation.
         if (this.has("frame")) {
@@ -118,10 +118,8 @@ class Runner {
                 this.frame(0);
             }
         }
-        // Otherwise, normal run.
-        else {
-            return this._run(code);
-        }
+
+        return out;
     }
 
     stop() {
