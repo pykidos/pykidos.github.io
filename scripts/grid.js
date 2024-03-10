@@ -1,4 +1,4 @@
-import { DEFAULT_ROWS, DEFAULT_COLS } from "./constants.js";
+import { DEFAULT_ROWS, DEFAULT_COLS, MAX_ROWS, MAX_COLS } from "./constants.js";
 import { clamp } from "./utils.js";
 
 export { Grid };
@@ -29,8 +29,8 @@ class Grid {
     }
 
     reshape(n, m) {
-        this.rows = n;
-        this.cols = m;
+        n = this.rows = clamp(Math.round(n), 1, MAX_ROWS);
+        m = this.cols = clamp(Math.round(m), 1, MAX_COLS);
 
         // Clear the grid.
         while (this.gridTable.firstChild) {

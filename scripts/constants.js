@@ -5,6 +5,8 @@
 
 export const DEFAULT_ROWS = 10;
 export const DEFAULT_COLS = 10;
+export const MAX_ROWS = 100;
+export const MAX_COLS = 100;
 export const DEFAULT_INTERVAL = .1;
 
 export const HEADER = (locale) => `
