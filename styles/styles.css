@@ -168,6 +168,7 @@ emoji-picker.visible {
     text-overflow: ellipsis;
     border: 0.5px solid #ddd;
     aspect-ratio: 1/1;
+    cursor: pointer;
 }
 
 #grid #grid-table>div>* {
