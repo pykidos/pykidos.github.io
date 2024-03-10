@@ -36,6 +36,7 @@ class Runner {
         this.pyodide.setStdout({
             batched: (msg) => {
                 this.outputElement.textContent += msg + "\n";
+                this.outputElement.scrollTop = this.outputElement.scrollHeight;
             }
         });
     }
@@ -45,6 +46,7 @@ class Runner {
         this.dispatcher.on("run", (e) => { this.run(e.code); });
         this.dispatcher.on("stop", (e) => { this.stop(); });
         this.dispatcher.on("click", (e) => { this.click(e.row, e.col); });
+        this.dispatcher.on("keyboard", (e) => { this.keyboard(e.key); });
     }
 
     getHeader() {
@@ -80,6 +82,7 @@ class Runner {
         }
         catch (error) {
             this.outputElement.textContent = error;
+            this.outputElement.scrollTop = this.outputElement.scrollHeight;
             this.outputElement.classList.add("error");
             out = false;
         }
@@ -130,5 +133,10 @@ class Runner {
     click(row, col) {
         if (this.has("click"))
             this._run(`click(${row}, ${col})`, false, false, false);
+    }
+
+    keyboard(key) {
+        if (this.has("keyboard"))
+            this._run(`keyboard("${key}")`, false, false, false);
     }
 };

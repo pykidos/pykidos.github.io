@@ -22,6 +22,13 @@ class Grid {
         this.reshape(this.rows, this.cols);
 
         this.setupDispatcher();
+        this.setupKeyboard();
+    }
+
+    setupKeyboard() {
+        this.gridTable.addEventListener("keyup", (e) => {
+            this.dispatcher.keyboard(this, e.key);
+        });
     }
 
     setupDispatcher() {

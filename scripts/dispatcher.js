@@ -79,4 +79,8 @@ class Dispatcher {
     click(source, i, j) {
         this.emit("click", source, { "row": i, "col": j });
     }
+
+    keyboard(source, key) {
+        this.emit("keyboard", source, { "key": key });
+    }
 };
