@@ -71,6 +71,8 @@ def ${locale.diagonal}(k, col):
 def ${locale.block}(i0, j0, i1, j1, col):
     grid.block(i0, j0, i1, j1, *col)
 
+${locale.print} = print
+
 `;
 
 // HACK: this is to force the sys.stdout to be flushed.
