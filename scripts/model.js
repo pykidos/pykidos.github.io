@@ -18,6 +18,20 @@ class Model {
         // });
 
         this.editor = null;
+        this.emojiButton = document.getElementById("emoji-button");
+        this.emojiPicker = document.getElementById("emoji-picker");
+        this.emojiButton.addEventListener("click", (e) => {
+            this.emojiPicker.classList.toggle("visible");
+        });
+
+        this.emojiPicker.addEventListener('emoji-click', (e) => {
+            this.editor.insert(e.detail.unicode);
+            this.emojiPicker.classList.remove("visible");
+            this.editor.focus();
+        });
+        this.emojiPicker.addEventListener('focusout', (e) => {
+            this.emojiPicker.classList.remove("visible");
+        });
     }
 
     /* Internal                                                                                  */

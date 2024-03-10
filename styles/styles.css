@@ -53,6 +53,22 @@ html {
     flex-grow: 1;
 }
 
+#buttons-bar {
+    position: relative;
+}
+
+emoji-picker {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+emoji-picker.visible {
+    display: block;
+}
+
 #code-editor {
     height: 100%;
     font-size: 10pt;
