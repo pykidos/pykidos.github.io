@@ -1,5 +1,5 @@
 import { DEFAULT_CODE } from "./constants.js";
-import { LOCALE } from "./i18.js";
+import { LOCALE } from "./locale.js";
 
 export { Model, };
 
@@ -53,6 +53,9 @@ class Model {
 
     async init() {
         this.editor = ace.edit("code-editor");
+        this.editor.setOptions({
+            fontSize: "12pt"
+        });
         this.editor.session.setMode("ace/mode/python");
 
         // this.setCode(DEFAULT_CODE(LOCALE));

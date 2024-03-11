@@ -1,5 +1,6 @@
 import { HEADER, FOOTER, DEFAULT_INTERVAL } from "./constants.js";
-import { LOCALE } from "./i18.js";
+import { getLang, getLocale, addLocale } from "./locale.js";
+import { LOCALE } from "./locale.js";
 
 export { Runner };
 
@@ -50,7 +51,15 @@ class Runner {
     }
 
     getHeader() {
-        return HEADER(LOCALE);
+        // Replace all keys by themselves in the header constant.
+        let header = HEADER(LOCALE);
+
+        // Add locale aliases.
+        let lang = getLang(); // TODO: take from code metadata instead
+        let locale = getLocale(lang);
+
+        header += "\n" + addLocale(locale);
+        return header;
     }
 
     getFooter() {
@@ -87,7 +96,9 @@ class Runner {
             out = false;
         }
 
-        let interval = this.get(LOCALE['interval']);
+        // Parse the interval: use the localized variable name.
+        // NOTE: use the code metadata instead.
+        let interval = this.get('interval', getLang());
         if (interval) this.interval = interval;
 
         this.dispatcher.spinning(this, false);
@@ -97,17 +108,24 @@ class Runner {
     async frame(i) {
         if (!this.isPlaying) return;
 
-        let out = await this._run(`frame(${i})`, false, false, false);
-        if (out != false)
-            setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
+        if (this.has("frame")) {
+            let out = await this._run(`frame(${i})`, false, false, false);
+            if (out != false)
+                setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
+        }
     }
 
-    get(varName) {
+    get(varName, lang = null) {
+        if (lang) {
+            // Use the localized name if a lang is provided.
+            let locale = getLocale(getLang());
+            varName = locale[varName];
+        }
         return this.globals ? this.globals.toJs().get(varName) : null;
     }
 
     has(varName) {
-        return this.get(varName) != null;
+        return this.globals && (this.get(varName) != null);
     }
 
     async run(code) {

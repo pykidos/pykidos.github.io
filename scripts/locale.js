@@ -1,6 +1,3 @@
-import { HEADER } from "./constants.js";
-
-
 /*************************************************************************************************/
 /* Localization                                                                                  */
 /*************************************************************************************************/
@@ -33,23 +30,32 @@ export const LOCALIZATION = {
 };
 
 
-export function getLocale() {
-    let lang = navigator.language.split('-')[0];
+export function getLang() {
+    return navigator.language.split('-')[0];
+}
 
-    // DEBUG: force EN for now.
-    // lang = "en";
+export function getLocale(lang = null) {
+    // Without argument, return {key: key} (ie default english locale)
+    // Otherwise, return {key: translation}.
 
-    let locale = LOCALIZATION[lang];
-    if (!locale) {
-        locale = {};
-        // Create "X": "X" for the default "en" language.
-        const frKeys = Object.keys(LOCALIZATION.fr);
-        frKeys.forEach(key => {
-            locale[key] = key;
-        });
-    }
+    if (lang) return LOCALIZATION[lang];
+
+    // Create "X": "X" for the default "en" language.
+    let locale = {};
+    Object.keys(LOCALIZATION.fr).forEach(key => { locale[key] = key; });
     return locale;
 }
 
+export function addLocale(locale) {
+    let result = '';
+    for (const key in locale) {
+        if (Object.hasOwnProperty.call(locale, key)) {
+            result += `${locale[key]} = ${key}\n`;
+        }
+    }
+    return result;
+}
 
+
+// This default englisih locale just contains {key: key}.
 export const LOCALE = getLocale();

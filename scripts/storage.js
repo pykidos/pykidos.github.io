@@ -1,5 +1,5 @@
 import { DEFAULT_CODE } from "./constants.js";
-import { LOCALE } from "./i18.js";
+import { LOCALE } from "./locale.js";
 
 export { Storage };
 
