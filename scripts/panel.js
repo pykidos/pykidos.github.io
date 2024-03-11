@@ -35,17 +35,20 @@ class Panel {
     /*********************************************************************************************/
 
     setupDispatcher() {
+        this.dispatcher.on("run", (e) => {
+            this.setIcon(this.state.isPlaying);
+        });
     }
 
     setupRunButton() {
         this.runButton.addEventListener("click", (e) => {
-            // Toggle the button icon.
-            let icon = this.runButton.innerHTML;
-            this.runButton.innerHTML = icon == PLAY_ICON ? STOP_ICON : PLAY_ICON;
-
             // Emit the run event.
             this.dispatcher.run(this, this.model.editor.getCode());
         });
+    }
+
+    setIcon(isPlaying) {
+        this.runButton.innerHTML = isPlaying ? PLAY_ICON : STOP_ICON;
     }
 
     // setupClearButton() {

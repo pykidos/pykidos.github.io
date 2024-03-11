@@ -17,7 +17,6 @@ class Runner {
 
         this.pyodide = null;
         this.globals = null;
-        this.isPlaying = false;
         this.outputElement = document.getElementById("terminal-output");
 
         this.interval = DEFAULT_INTERVAL;
@@ -94,7 +93,7 @@ class Runner {
         try {
             let options = { "globals": this.globals };
             out = await this.pyodide.runPython(fullCode, options);
-            this.stdout();
+            this.stdout(); // NOTE: the console output is appended via the pyodide batch callback
         }
         catch (error) {
             this.stderr(error);
@@ -159,14 +158,14 @@ class Runner {
 
     reset() {
         // Stop and clear both the global variables and the grid.
-        this.isPlaying = false;
+        this.state.isPlaying = false;
         if (!this.pyodide) return;
 
         // Clear the global variables.
         this.globals = this.pyodide.toPy({});
 
         // Clear the standard output.
-        this.stdout();
+        this.clearOutput();
 
         // Emit the clear event, which will clear the grid.
         this.dispatcher.clear(this);
@@ -177,7 +176,7 @@ class Runner {
         this.model.storage.save(this.state.name, code);
 
         // If is playing, stop.
-        if (this.isPlaying) {
+        if (this.state.isPlaying) {
             return this.stop();
         }
 
@@ -203,10 +202,7 @@ class Runner {
 
     stop() {
         // Stop the animation.
-        this.isPlaying = false;
-
-        // // Emit the stop event.
-        // this.dispatcher.stop(this, code);
+        this.state.isPlaying = false;
 
         return null;
     }
@@ -217,15 +213,15 @@ class Runner {
     tryPlay() {
         // If there is a "frame" function, call it for animation.
         if (this.has("frame")) {
-            if (!this.isPlaying) {
-                this.isPlaying = true;
+            if (!this.state.isPlaying) {
+                this.state.isPlaying = true;
                 this.frame(0);
             }
         }
     }
 
     async frame(i) {
-        if (!this.isPlaying) return;
+        if (!this.state.isPlaying) return;
 
         if (this.has("frame")) {
             let out = await this._run(`frame(${i})`, false, false, false);

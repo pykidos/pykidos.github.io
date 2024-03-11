@@ -65,6 +65,7 @@ class State {
 
     init(state) {
         this.name = state.name || DEFAULT_PARAM;
+        this.isPlaying = false; // NOTE: always start false.
     }
 
     reset() {
