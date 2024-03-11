@@ -22,13 +22,13 @@ class Storage {
     /* Internal functions                                                                        */
     /*********************************************************************************************/
 
-    _makeListing(code, lang) {
+    _makeListing(code, lang, data) {
         return {
-            "lang": lang,
-            "code": code,
             "visual": DEFAULT_VISUAL,
-            "data": null, // TODO: contents of the grid/visual
             "version": DEFAULT_VERSION,
+            "code": code,
+            "lang": lang,
+            "data": data,
         };
     }
 
@@ -60,8 +60,8 @@ class Storage {
         }
     }
 
-    save(name, code, lang = LANG) {
-        let listing = this._makeListing(code, lang);
+    save(name, code, lang = LANG, data = null) {
+        let listing = this._makeListing(code, lang, data);
         let s = encode(listing);
         localStorage.setItem(name, s);
     }

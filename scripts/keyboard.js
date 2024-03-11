@@ -35,9 +35,8 @@ class Keyboard {
                 event.preventDefault();
 
                 // Save the code in the storage.
-                this.model.storage.save(this.state.name, code);
+                this.model.save(this.state.name);
             }
         });
-
     }
 };

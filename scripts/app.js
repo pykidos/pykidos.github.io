@@ -2,7 +2,6 @@ import { Model } from "./model.js";
 import { Dispatcher } from "./dispatcher.js";
 import { State } from "./state.js";
 
-import { Grid } from "./grid.js";
 import { Keyboard } from "./keyboard.js";
 import { Panel } from "./panel.js";
 import { Runner } from "./runner.js";
@@ -25,7 +24,6 @@ class App {
         this.dispatcher = new Dispatcher();
 
         // Components.
-        this.grid = new Grid(this.state, this.model, this.dispatcher);
         this.keyboard = new Keyboard(this.state, this.model, this.dispatcher);
         this.panel = new Panel(this.state, this.model, this.dispatcher);
         this.runner = new Runner(this.state, this.model, this.dispatcher);

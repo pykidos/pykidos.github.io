@@ -167,24 +167,27 @@ class Runner {
         this.clearOutput();
 
         // Emit the clear event, which will clear the grid.
-        this.dispatcher.clear(this);
+        this.model.grid.clear();
     }
 
     async run(code) {
         if (!code) return;
-
-        // Save the code in the storage.
-        this.model.storage.save(this.state.name, code);
+        let out = null;
 
         // If is playing, stop.
         if (this.state.isPlaying) {
-            return this.stop();
+            out = this.stop();
         }
 
         // If not playing, run the code.
         else {
-            return this.start(code);
+            out = await this.start(code);
         }
+
+        // Save the code in the storage.
+        this.model.save(this.state.name);
+
+        return out;
     }
 
     async start(code) {

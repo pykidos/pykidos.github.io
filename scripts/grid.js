@@ -10,33 +10,19 @@ export { Grid };
 /*************************************************************************************************/
 
 class Grid {
-    constructor(state, model, dispatcher) {
-        this.state = state;
-        this.model = model;
-        this.dispatcher = dispatcher;
-
+    constructor() {
         this.grid = document.getElementById('grid');
         this.gridTable = document.getElementById('grid-table');
         this.rows = DEFAULT_ROWS;
         this.cols = DEFAULT_COLS;
         this.reshape(this.rows, this.cols);
 
-        this.setupDispatcher();
-        this.setupKeyboard();
+        // this.setupDispatcher();
+        // this.setupKeyboard();
     }
 
-    /* Setup functions                                                                           */
-    /*********************************************************************************************/
+    init() {
 
-    setupKeyboard() {
-        this.gridTable.addEventListener("keydown", (e) => {
-            this.dispatcher.keyboard(this, e.key);
-        });
-    }
-
-    setupDispatcher() {
-        // Clear the grid.
-        this.dispatcher.on("clear", (e) => { this.clear(); });
     }
 
     /* Internal functions                                                                        */
@@ -47,7 +33,7 @@ class Grid {
         let row = Math.floor(i / this.rows);
         let col = i % this.rows;
         cell.addEventListener("click", (e) => {
-            this.dispatcher.click(this, row, col);
+            // this.dispatcher.click(this, row, col);
         });
         cell.title = `${row}, ${col}`;
         this.gridTable.appendChild(cell);
@@ -100,12 +86,14 @@ class Grid {
     }
 
     bgcolor(i, j, r, g, b) {
+        // NOTE: if not rgb, return the bg color
         let cell = this.cell(i, j);
         if (cell)
             cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 
     text(i, j, string) {
+        // NOTE: if string is undefined, return the text
         let cell = this.cell(i, j);
         if (cell)
             cell.textContent = string;
@@ -147,6 +135,47 @@ class Grid {
             for (let j = j0; j < j1; j++) {
                 this.bgcolor(i, j, r, g, b);
             }
+        }
+    }
+
+    /* Serialization                                                                             */
+    /*********************************************************************************************/
+
+    dump() {
+        const data = {};
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                const cell = this.cell(i, j);
+                if (cell) {
+                    const bgColor = getComputedStyle(cell).getPropertyValue('background-color');
+                    const text = cell.textContent.trim();
+
+                    if ((bgColor == "rgba(0, 0, 0, 0)") && (!text)) continue;
+
+                    const rgb = bgColor.match(/\d+/g);
+                    data[`${i},${j}`] = {
+                        bgcolor: rgb.map(Number),
+                        text: text
+                    };
+                }
+            }
+        }
+        return { "data": data, "rows": this.rows, "cols": this.cols, };
+    }
+
+    load(data) {
+        if (!data) return;
+
+        // const data = JSON.parse(dataJson);
+        this.reshape(data.rows, data.cols);
+
+        for (const key in data.data) {
+            const cellData = data.data[key];
+            if (!cellData) continue;
+            const [i, j] = key.split(',').map(Number);
+            const { bgcolor, text } = cellData;
+            this.bgcolor(i, j, ...bgcolor);
+            this.text(i, j, text);
         }
     }
 };

@@ -14,7 +14,7 @@ export const DEFAULT_VERSION = 1;
 export const HEADER = (locale) => `
 import js
 
-grid = js.window.app.grid
+grid = js.window.app.model.grid
 
 ${locale.black} = (0, 0, 0)
 ${locale.white} = (255, 255, 255)

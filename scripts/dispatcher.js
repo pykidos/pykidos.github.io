@@ -40,10 +40,10 @@ class Dispatcher {
     /* Code management                                                                           */
     /*********************************************************************************************/
 
-    clear(source) {
-        // Clear the grid.
-        this.emit("clear", source);
-    }
+    // clear(source) {
+    //     // Clear the grid.
+    //     this.emit("clear", source);
+    // }
 
     new(source) {
         this.emit("new", source, {});
@@ -55,6 +55,10 @@ class Dispatcher {
 
     delete(source, name) {
         this.emit("delete", source, { "name": name });
+    }
+
+    save(source) {
+        this.emit("save", source);
     }
 
     /* Runner                                                                                    */

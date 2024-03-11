@@ -131,6 +131,9 @@ class Selector {
         // Show the code in the editor.
         this.model.editor.setCode(code);
 
+        // Load the grid.
+        this.model.grid.load(listing.data);
+
         // Update the state.
         this.state.name = name;
 
