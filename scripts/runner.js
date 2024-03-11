@@ -25,12 +25,6 @@ class Runner {
         this.setupDispatcher();
     }
 
-    reset() {
-        this.isPlaying = false;
-        if (!this.pyodide) return
-        this.globals = this.pyodide.toPy({});
-    }
-
     async init() {
         this.pyodide = await loadPyodide();
         this.reset();
@@ -42,6 +36,9 @@ class Runner {
         });
     }
 
+    /* Setup functions                                                                           */
+    /*********************************************************************************************/
+
     setupDispatcher() {
         this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
@@ -50,21 +47,8 @@ class Runner {
         this.dispatcher.on("keyboard", (e) => { this.keyboard(e.key); });
     }
 
-    getHeader() {
-        // Replace all keys by themselves in the header constant.
-        let header = HEADER(LOCALE);
-
-        // Add locale aliases.
-        let lang = getLang(); // TODO: take from code metadata instead
-        let locale = getLocale(lang);
-
-        header += "\n" + addLocale(locale);
-        return header;
-    }
-
-    getFooter() {
-        return FOOTER;
-    }
+    /* Internal functions                                                                        */
+    /*********************************************************************************************/
 
     async _run(code, reset = true, addHeader = true, addFooter = true) {
         this.dispatcher.spinning(this, true);
@@ -74,7 +58,6 @@ class Runner {
         if (reset) {
             this.reset();
             this.dispatcher.clear(this);
-            this.outputElement.textContent = "";
         }
 
         let b = "\n\n";
@@ -105,15 +88,27 @@ class Runner {
         return out;
     }
 
-    async frame(i) {
-        if (!this.isPlaying) return;
+    /* Code construction                                                                         */
+    /*********************************************************************************************/
 
-        if (this.has("frame")) {
-            let out = await this._run(`frame(${i})`, false, false, false);
-            if (out != false)
-                setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
-        }
+    getHeader() {
+        // Replace all keys by themselves in the header constant.
+        let header = HEADER(LOCALE);
+
+        // Add locale aliases.
+        let lang = getLang(); // TODO: take from code metadata instead
+        let locale = getLocale(lang);
+
+        header += "\n" + addLocale(locale);
+        return header;
     }
+
+    getFooter() {
+        return FOOTER;
+    }
+
+    /* Context                                                                                   */
+    /*********************************************************************************************/
 
     get(varName, lang = null) {
         if (lang) {
@@ -126,6 +121,20 @@ class Runner {
 
     has(varName) {
         return this.globals && (this.get(varName) != null);
+    }
+
+    /* Runner                                                                                    */
+    /*********************************************************************************************/
+
+    reset() {
+        this.isPlaying = false;
+        if (!this.pyodide) return;
+
+        // Clear the global variables.
+        this.globals = this.pyodide.toPy({});
+
+        // Clear the standard output.
+        this.outputElement.textContent = "";
     }
 
     async run(code) {
@@ -144,9 +153,22 @@ class Runner {
         return out;
     }
 
+    async frame(i) {
+        if (!this.isPlaying) return;
+
+        if (this.has("frame")) {
+            let out = await this._run(`frame(${i})`, false, false, false);
+            if (out != false)
+                setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
+        }
+    }
+
     stop() {
         this.isPlaying = false;
     }
+
+    /* Input events                                                                              */
+    /*********************************************************************************************/
 
     click(row, col) {
         if (this.has("click"))

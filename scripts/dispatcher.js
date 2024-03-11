@@ -68,10 +68,6 @@ class Dispatcher {
         this.emit("select", source, { "name": name });
     }
 
-    setNames(source, names, name) {
-        this.emit("setNames", source, { "names": names, "name": name });
-    }
-
     spinning(source, isSpinning) {
         this.emit("spinning", source, { "isSpinning": isSpinning });
     }

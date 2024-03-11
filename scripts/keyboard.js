@@ -24,7 +24,7 @@ class Keyboard {
             if (event.ctrlKey && (event.key === 'Enter' || event.keyCode === 13)) {
                 event.preventDefault();
 
-                that.dispatcher.run(that, that.model.getCode());
+                that.dispatcher.run(that, that.model.editor.getCode());
             }
         });
 

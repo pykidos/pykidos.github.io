@@ -36,7 +36,7 @@ class Panel {
 
     setupRunButton() {
         this.runButton.addEventListener("click", (e) => {
-            this.dispatcher.run(this, this.model.getCode());
+            this.dispatcher.run(this, this.model.editor.getCode());
         });
     }
 

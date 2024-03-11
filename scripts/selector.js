@@ -20,38 +20,43 @@ class Selector {
     }
 
     init() {
-        // if (this.state.name != undefined && this.names.includes(this.state.name)) {
-        //     console.log("a");
-        //     this.select(this.state.name);
-        // }
-        // else if (this.names.length > 0) {
-        //     console.log("b");
-        //     this.select(this.names[0]);
-        // }
+        // Load the list of names stored in the storage.
+        let names = this.model.storage.list();
+
+        let first = names ? names[0] : null;
+
+        this.state.name = this.state.name || first;
+
+        // Set the selector list with those names.
+        this.setNames(names, this.state.name);
     }
 
+    /* Setup functions                                                                           */
+    /*********************************************************************************************/
+
     setupDispatcher() {
-        this.dispatcher.on("setNames", (e) => {
-            this.setNames(e.names, e.name);
-        });
     }
 
     setupNewButton() {
-        this.newButton.addEventListener('click', (e) => {
-            this.dispatcher.new(this);
-        });
+        this.newButton.addEventListener('click', (e) => { this.new(); });
     }
 
+    /* Internal functions                                                                        */
+    /*********************************************************************************************/
+
     _createItem(name, selected) {
+        // Create HTML item.
         const item = document.createElement('div');
         item.classList.add('item');
         if (selected)
             item.classList.add('selected');
 
+        // Listing name.
         const itemName = document.createElement('span');
         itemName.textContent = name;
         item.appendChild(itemName);
 
+        // Rename button.
         const renameButton = document.createElement('button');
         renameButton.textContent = '✏️';
         renameButton.addEventListener('click', (e) => {
@@ -60,6 +65,7 @@ class Selector {
         });
         item.appendChild(renameButton);
 
+        // Delete button.
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '🗑️';
         deleteButton.addEventListener('click', (e) => {
@@ -72,7 +78,21 @@ class Selector {
         return item;
     }
 
+    _updateAndSelect(name) {
+        // Update the list to reflect the list of items stored, and select a code listing.
+
+        // Load the list of names stored in the storage.
+        let names = this.model.storage.list();
+
+        // Update the list of names, and select an item.
+        this.setNames(names, name);
+    }
+
+    /* Public functions                                                                          */
+    /*********************************************************************************************/
+
     setNames(names, selectedName) {
+        // Recreate the items.
         this.el.innerHTML = '';
         this.names = names;
 
@@ -87,9 +107,13 @@ class Selector {
     }
 
     select(name) {
+        // Called when clicking on an item.
+
         if (!name) return;
+
         console.log(`Select code listing "${name}".`);
 
+        // Add the selected CSS class only on the selected item.
         for (let child of this.el.childNodes) {
             if (child.childNodes[0].innerHTML != name)
                 child.classList.remove('selected');
@@ -97,17 +121,60 @@ class Selector {
                 child.classList.add('selected');
         }
 
-        this.dispatcher.select(this, name);
+        // Load the code listings in the storage.
+        try {
+            let code = this.model.storage.retrieve(name);
+
+            // Show the code in the editor.
+            this.model.editor.setCode(code);
+
+            // Update the state.
+            this.state.name = name;
+
+            // Emit the select event.
+            this.dispatcher.select(this, name);
+        }
+        catch (err) {
+            console.warn(`Code listing ${name} not found.`);
+        }
+    }
+
+    new() {
+        // Create a new code listing in the storage, and retrieve its name.
+        let name = this.model.storage.new();
+
+        // Select the newly-created code listing.
+        this._updateAndSelect(name)
+
+        // Emit the new event.
+        this.dispatcher.new(this);
     }
 
     rename(oldName, newName) {
         if (!newName) return;
         console.log(`Rename code listing from "${oldName}" to "${newName}".`);
+
+        // Rename the item in the storage.
+        this.model.storage.rename(oldName, newName);
+
+        // Update the list of items.
+        this._updateAndSelect(this.state.name);
+
+        // Emit the rename event.
         this.dispatcher.rename(this, oldName, newName);
     }
 
     delete(name) {
+        if (!name) return;
         console.log(`Delete code listing "${name}".`);
+
+        // Delete the item from the storage.
+        this.model.storage.delete(name);
+
+        // Update the list of items.
+        this._updateAndSelect(this.model.storage.first());
+
+        // Emit the delete event.
         this.dispatcher.delete(this, name);
     }
 };

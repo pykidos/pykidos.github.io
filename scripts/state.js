@@ -7,7 +7,7 @@ export { State };
 /* Defaults                                                                                      */
 /*************************************************************************************************/
 
-const DEFAULT_PARAM = "untitled 0";
+const DEFAULT_PARAM = "";
 
 
 
