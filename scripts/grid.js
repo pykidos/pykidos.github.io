@@ -47,6 +47,7 @@ class Grid {
         // HACK: found an adequate grid width in "vmin" unit by trial and error.
         let k = clamp((60.0 * m) / n, 1, 60);
         this.grid.style.width = `${k}vmin`;
+        this.font(`calc((95vw - 300px) / (2 * ${this.rows}))`);
 
         this.gridTable.style.gridTemplateColumns = `repeat(${m}, 1fr)`;
         this.gridTable.style.gridTemplateRows = `repeat(${n}, 1fr)`;
@@ -54,6 +55,10 @@ class Grid {
         for (let i = 0; i < n * m; i++) {
             this._createCell(i);
         }
+    }
+
+    font(size) {
+        this.gridTable.style.fontSize = size;
     }
 
     _createCell(i) {
@@ -64,8 +69,6 @@ class Grid {
             this.dispatcher.click(this, row, col);
         });
         cell.title = `${row}, ${col}`;
-        let size = cell.width;
-        cell.style.fontSize = `calc((95vw - 300px) / (2 * ${this.rows}))`;
         this.gridTable.appendChild(cell);
     }
 
@@ -97,13 +100,7 @@ class Grid {
     }
 
     clear() {
-        this.fill(255, 255, 255);
-
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
-                this.text(i, j, "");
-            }
-        }
+        this.reshape(this.rows, this.cols);
     }
 
     line(i, r, g, b) {

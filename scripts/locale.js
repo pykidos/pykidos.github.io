@@ -6,6 +6,7 @@ export const LOCALIZATION = {
     "fr":
     {
         "size": "taille",
+        "font": "police",
         "color": "couleur",
         "text": "texte",
         "interval": "intervalle",

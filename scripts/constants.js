@@ -48,6 +48,9 @@ ${locale.purple} = (150, 100, 220);
 def ${locale.size}(n, m):
     grid.reshape(n, m)
 
+def ${locale.font}(size):
+    grid.font(f"{size}pt")
+
 def ${locale.color}(i, j, col):
     if callable(col): col = col()
     grid.bgcolor(i, j, *col)
