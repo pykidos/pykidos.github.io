@@ -2,6 +2,14 @@ export { Panel };
 
 
 /*************************************************************************************************/
+/* Constants                                                                                     */
+/*************************************************************************************************/
+
+const PLAY_ICON = "►";
+const STOP_ICON = "⏹";
+
+
+/*************************************************************************************************/
 /* Panel                                                                                         */
 /*************************************************************************************************/
 
@@ -11,18 +19,33 @@ class Panel {
         this.model = model;
         this.dispatcher = dispatcher;
 
-        // this.clearButton = document.getElementById("clear-button");
         this.runButton = document.getElementById("run-button");
-        // this.stopButton = document.getElementById("stop-button");
 
         this.setupDispatcher();
-
-        // this.setupClearButton();
         this.setupRunButton();
+
+        // this.clearButton = document.getElementById("clear-button");
+        // this.stopButton = document.getElementById("stop-button");
+        // this.setupClearButton();
         // this.setupStopButton();
     }
 
+
+    /* Setup functions                                                                           */
+    /*********************************************************************************************/
+
     setupDispatcher() {
+    }
+
+    setupRunButton() {
+        this.runButton.addEventListener("click", (e) => {
+            // Toggle the button icon.
+            let icon = this.runButton.innerHTML;
+            this.runButton.innerHTML = icon == PLAY_ICON ? STOP_ICON : PLAY_ICON;
+
+            // Emit the run event.
+            this.dispatcher.run(this, this.model.editor.getCode());
+        });
     }
 
     // setupClearButton() {
@@ -30,13 +53,6 @@ class Panel {
     //         this.dispatcher.clear(this);
     //     });
     // }
-
-    setupRunButton() {
-        this.runButton.addEventListener("click", (e) => {
-            this.dispatcher.run(this, this.model.editor.getCode());
-        });
-    }
-
     // setupStopButton() {
     //     this.stopButton.addEventListener("click", (e) => {
     //         this.dispatcher.stop(this);

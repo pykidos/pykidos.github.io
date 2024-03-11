@@ -60,13 +60,13 @@ class Dispatcher {
     /* Runner                                                                                    */
     /*********************************************************************************************/
 
-    start(source, code) {
-        this.emit("stop", source, { "code": code });
-    }
+    // start(source, code) {
+    //     this.emit("stop", source, { "code": code });
+    // }
 
-    stop(source) {
-        this.emit("stop", source);
-    }
+    // stop(source) {
+    //     this.emit("stop", source);
+    // }
 
     run(source, code) {
         this.emit("run", source, { "code": code });
