@@ -25,6 +25,9 @@ class Grid {
         this.setupKeyboard();
     }
 
+    /* Setup functions                                                                           */
+    /*********************************************************************************************/
+
     setupKeyboard() {
         this.gridTable.addEventListener("keydown", (e) => {
             this.dispatcher.keyboard(this, e.key);
@@ -32,8 +35,26 @@ class Grid {
     }
 
     setupDispatcher() {
+        // Clear the grid.
         this.dispatcher.on("clear", (e) => { this.clear(); });
     }
+
+    /* Internal functions                                                                        */
+    /*********************************************************************************************/
+
+    _createCell(i) {
+        let cell = document.createElement('div');
+        let row = Math.floor(i / this.rows);
+        let col = i % this.rows;
+        cell.addEventListener("click", (e) => {
+            this.dispatcher.click(this, row, col);
+        });
+        cell.title = `${row}, ${col}`;
+        this.gridTable.appendChild(cell);
+    }
+
+    /* Grid manipulation                                                                         */
+    /*********************************************************************************************/
 
     reshape(n, m) {
         n = this.rows = clamp(Math.round(n), 1, MAX_ROWS);
@@ -57,20 +78,19 @@ class Grid {
         }
     }
 
+    clear() {
+        this.reshape(this.rows, this.cols);
+    }
+
+    /* Global functions                                                                          */
+    /*********************************************************************************************/
+
     font(size) {
         this.gridTable.style.fontSize = size;
     }
 
-    _createCell(i) {
-        let cell = document.createElement('div');
-        let row = Math.floor(i / this.rows);
-        let col = i % this.rows;
-        cell.addEventListener("click", (e) => {
-            this.dispatcher.click(this, row, col);
-        });
-        cell.title = `${row}, ${col}`;
-        this.gridTable.appendChild(cell);
-    }
+    /* Cell functions                                                                            */
+    /*********************************************************************************************/
 
     cell(i, j) {
         i = Math.floor(i);
@@ -91,16 +111,15 @@ class Grid {
             cell.textContent = string;
     }
 
+    /* Multi-cell functions                                                                      */
+    /*********************************************************************************************/
+
     fill(r, g, b) {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 this.bgcolor(i, j, r, g, b);
             }
         }
-    }
-
-    clear() {
-        this.reshape(this.rows, this.cols);
     }
 
     line(i, r, g, b) {

@@ -37,10 +37,11 @@ class Dispatcher {
         this.emit("connect", source);
     }
 
-    /* Events                                                                                    */
+    /* Code management                                                                           */
     /*********************************************************************************************/
 
     clear(source) {
+        // Clear the grid.
         this.emit("clear", source);
     }
 
@@ -54,6 +55,13 @@ class Dispatcher {
 
     delete(source, name) {
         this.emit("delete", source, { "name": name });
+    }
+
+    /* Runner                                                                                    */
+    /*********************************************************************************************/
+
+    start(source, code) {
+        this.emit("stop", source, { "code": code });
     }
 
     stop(source) {
@@ -71,6 +79,9 @@ class Dispatcher {
     spinning(source, isSpinning) {
         this.emit("spinning", source, { "isSpinning": isSpinning });
     }
+
+    /* Input events                                                                              */
+    /*********************************************************************************************/
 
     click(source, i, j) {
         this.emit("click", source, { "row": i, "col": j });

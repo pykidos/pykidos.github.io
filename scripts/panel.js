@@ -11,28 +11,25 @@ class Panel {
         this.model = model;
         this.dispatcher = dispatcher;
 
-        this.clearButton = document.getElementById("clear-button");
+        // this.clearButton = document.getElementById("clear-button");
         this.runButton = document.getElementById("run-button");
-        this.stopButton = document.getElementById("stop-button");
+        // this.stopButton = document.getElementById("stop-button");
 
         this.setupDispatcher();
 
-        this.setupClearButton();
+        // this.setupClearButton();
         this.setupRunButton();
-        this.setupStopButton();
-    }
-
-    async init() {
+        // this.setupStopButton();
     }
 
     setupDispatcher() {
     }
 
-    setupClearButton() {
-        this.clearButton.addEventListener("click", (e) => {
-            this.dispatcher.clear(this);
-        });
-    }
+    // setupClearButton() {
+    //     this.clearButton.addEventListener("click", (e) => {
+    //         this.dispatcher.clear(this);
+    //     });
+    // }
 
     setupRunButton() {
         this.runButton.addEventListener("click", (e) => {
@@ -40,9 +37,9 @@ class Panel {
         });
     }
 
-    setupStopButton() {
-        this.stopButton.addEventListener("click", (e) => {
-            this.dispatcher.stop(this);
-        });
-    }
+    // setupStopButton() {
+    //     this.stopButton.addEventListener("click", (e) => {
+    //         this.dispatcher.stop(this);
+    //     });
+    // }
 };

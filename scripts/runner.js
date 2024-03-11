@@ -29,9 +29,8 @@ class Runner {
         this.pyodide = await loadPyodide();
         this.reset();
         this.pyodide.setStdout({
-            batched: (msg) => {
-                this.outputElement.textContent += msg + "\n";
-                this.outputElement.scrollTop = this.outputElement.scrollHeight;
+            batched: (text) => {
+                this.stdout(text);
             }
         });
     }
@@ -40,50 +39,74 @@ class Runner {
     /*********************************************************************************************/
 
     setupDispatcher() {
-        this.dispatcher.on("clear", (e) => { this.reset(); });
         this.dispatcher.on("run", (e) => { this.run(e.code); });
-        this.dispatcher.on("stop", (e) => { this.stop(); });
         this.dispatcher.on("click", (e) => { this.click(e.row, e.col); });
         this.dispatcher.on("keyboard", (e) => { this.keyboard(e.key); });
+
+        // this.dispatcher.on("clear", (e) => { this.reset(); });
+        // this.dispatcher.on("stop", (e) => { this.stop(); });
+    }
+
+    /* Output functions                                                                          */
+    /*********************************************************************************************/
+
+    clearOutput() {
+        this.outputElement.textContent = "";
+        this.outputElement.classList.remove("error");
+    }
+
+    scrollOutput() {
+        this.outputElement.scrollTop = this.outputElement.scrollHeight;
+    }
+
+    stdout(text) {
+        if (text)
+            this.outputElement.textContent += text + "\n";
+        this.outputElement.classList.remove("error");
+        this.scrollOutput();
+    }
+
+    stderr(text) {
+        this.outputElement.textContent = text;
+        this.outputElement.classList.add("error");
+        this.scrollOutput();
     }
 
     /* Internal functions                                                                        */
     /*********************************************************************************************/
 
     async _run(code, reset = true, addHeader = true, addFooter = true) {
+        // Start the spinning cursor.
         this.dispatcher.spinning(this, true);
 
+        // Lazily initialize the pyodide engine.
         if (!this.pyodide) await this.init();
 
         if (reset) {
             this.reset();
-            this.dispatcher.clear(this);
         }
 
-        let b = "\n\n";
-        let fullCode = (
-            addHeader ? this.getHeader() : '') +
-            b + code + b +
-            (addFooter ? this.getFooter() : '');
-        let options = { "globals": this.globals };
-        let out = null;
+        // Construct the code.
+        let fullCode = this.makeCode(code, addHeader, addFooter);
+        let out = false;
 
+        // Try running the code and update the output.
         try {
+            let options = { "globals": this.globals };
             out = await this.pyodide.runPython(fullCode, options);
-            this.outputElement.classList.remove("error");
+            this.stdout();
         }
         catch (error) {
-            this.outputElement.textContent = error;
-            this.outputElement.scrollTop = this.outputElement.scrollHeight;
-            this.outputElement.classList.add("error");
-            out = false;
+            this.stderr(error);
         }
 
         // Parse the interval: use the localized variable name.
         // NOTE: use the code metadata instead.
         let interval = this.get('interval', getLang());
-        if (interval) this.interval = interval;
+        if (interval)
+            this.interval = interval;
 
+        // Stop the spinning cursor.
         this.dispatcher.spinning(this, false);
         return out;
     }
@@ -107,6 +130,14 @@ class Runner {
         return FOOTER;
     }
 
+    makeCode(code, addHeader = true, addFooter = true) {
+        let b = "\n\n";
+        return (
+            addHeader ? this.getHeader() : '') +
+            b + code + b +
+            (addFooter ? this.getFooter() : '');
+    }
+
     /* Context                                                                                   */
     /*********************************************************************************************/
 
@@ -127,6 +158,7 @@ class Runner {
     /*********************************************************************************************/
 
     reset() {
+        // Stop and clear both the global variables and the grid.
         this.isPlaying = false;
         if (!this.pyodide) return;
 
@@ -134,14 +166,55 @@ class Runner {
         this.globals = this.pyodide.toPy({});
 
         // Clear the standard output.
-        this.outputElement.textContent = "";
+        this.stdout();
+
+        // Emit the clear event, which will clear the grid.
+        this.dispatcher.clear(this);
     }
 
     async run(code) {
-        if (this.isPlaying) return;
+        // Save the code in the storage.
+        this.model.storage.save(this.state.name, code);
 
+        // If is playing, stop.
+        if (this.isPlaying) {
+            return this.stop();
+        }
+
+        // If not playing, run the code.
+        else {
+            return this.start(code);
+        }
+    }
+
+    async start(code) {
+        // Run the code.
         let out = await this._run(code);
 
+        // If there is a frame function, start the animation.
+        this.tryPlay();
+
+        // // Emit the start event.
+        // this.dispatcher.start(this, code);
+
+        // Return the output.
+        return out;
+    }
+
+    stop() {
+        // Stop the animation.
+        this.isPlaying = false;
+
+        // // Emit the stop event.
+        // this.dispatcher.stop(this, code);
+
+        return null;
+    }
+
+    /* Animation                                                                                 */
+    /*********************************************************************************************/
+
+    tryPlay() {
         // If there is a "frame" function, call it for animation.
         if (this.has("frame")) {
             if (!this.isPlaying) {
@@ -149,8 +222,6 @@ class Runner {
                 this.frame(0);
             }
         }
-
-        return out;
     }
 
     async frame(i) {
@@ -161,10 +232,6 @@ class Runner {
             if (out != false)
                 setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
         }
-    }
-
-    stop() {
-        this.isPlaying = false;
     }
 
     /* Input events                                                                              */
