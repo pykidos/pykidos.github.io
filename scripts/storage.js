@@ -1,4 +1,4 @@
-import { DEFAULT_CODE, DEFAULT_VISUAL } from "./constants.js";
+import { DEFAULT_CODE, DEFAULT_VISUAL, DEFAULT_VERSION } from "./constants.js";
 import { LANG, LOCALE } from "./locale.js";
 import { encode, decode } from "./utils.js";
 
@@ -28,6 +28,7 @@ class Storage {
             "code": code,
             "visual": DEFAULT_VISUAL,
             "data": null, // TODO: contents of the grid/visual
+            "version": DEFAULT_VERSION,
         };
     }
 
@@ -52,7 +53,7 @@ class Storage {
     rename(oldName, newName) {
         const listing = localStorage.getItem(oldName);
         if (listing !== null) {
-            localStorage.setItem(newName, s);
+            localStorage.setItem(newName, listing);
             localStorage.removeItem(oldName);
         } else {
             throw new Error(`Listing "${oldName}" not found.`);

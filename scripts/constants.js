@@ -9,6 +9,7 @@ export const MAX_ROWS = 100;
 export const MAX_COLS = 100;
 export const DEFAULT_INTERVAL = .1;
 export const DEFAULT_VISUAL = "grid"; // Later versions could support other visuals like canvas
+export const DEFAULT_VERSION = 1;
 
 export const HEADER = (locale) => `
 import js
