@@ -19,13 +19,23 @@ class Keyboard {
     }
 
     setupKeyboard() {
-        let that = this;
-        document.addEventListener('keydown', function (event) {
+        document.addEventListener('keydown', (event) => {
+            const code = this.model.editor.getCode();
+
+            // Control+Enter: run.
             if (event.ctrlKey && (event.key === 'Enter' || event.keyCode === 13)) {
                 event.preventDefault();
 
                 // Emit the run event.
-                that.dispatcher.run(that, that.model.editor.getCode());
+                this.dispatcher.run(this, code);
+            }
+
+            // Control+S: save.
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+
+                // Save the code in the storage.
+                this.model.storage.save(this.state.name, code);
             }
         });
 
