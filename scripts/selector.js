@@ -124,7 +124,6 @@ class Selector {
         // Load the code listings in the storage.
         // try {
         let listing = this.model.storage.retrieve(name);
-        console.log(listing);
 
         // Get the code in the listing object.
         let code = listing.code;

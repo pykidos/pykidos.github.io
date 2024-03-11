@@ -93,7 +93,7 @@ class Runner {
         try {
             let options = { "globals": this.globals };
             out = await this.pyodide.runPython(fullCode, options);
-            this.stdout(); // NOTE: the console output is appended via the pyodide batch callback
+            this.stdout(""); // NOTE: the console output is appended via the pyodide batch callback
         }
         catch (error) {
             this.stderr(error);
@@ -171,6 +171,8 @@ class Runner {
     }
 
     async run(code) {
+        if (!code) return;
+
         // Save the code in the storage.
         this.model.storage.save(this.state.name, code);
 
@@ -191,9 +193,6 @@ class Runner {
 
         // If there is a frame function, start the animation.
         this.tryPlay();
-
-        // // Emit the start event.
-        // this.dispatcher.start(this, code);
 
         // Return the output.
         return out;
@@ -216,6 +215,12 @@ class Runner {
                 this.state.isPlaying = true;
                 this.frame(0);
             }
+        }
+        else {
+            // HACK: reset the play icon in the panel.
+            this.state.isPlaying = true;
+            this.dispatcher.run(this, "");
+            this.state.isPlaying = false;
         }
     }
 
