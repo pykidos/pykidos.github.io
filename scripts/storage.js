@@ -1,5 +1,6 @@
-import { DEFAULT_CODE } from "./constants.js";
-import { LOCALE } from "./locale.js";
+import { DEFAULT_CODE, DEFAULT_VISUAL } from "./constants.js";
+import { LANG, LOCALE } from "./locale.js";
+import { encode, decode } from "./utils.js";
 
 export { Storage };
 
@@ -18,6 +19,18 @@ class Storage {
         }
     }
 
+    /* Internal functions                                                                        */
+    /*********************************************************************************************/
+
+    _makeListing(code, lang) {
+        return {
+            "lang": lang,
+            "code": code,
+            "visual": DEFAULT_VISUAL,
+            "data": null, // TODO: contents of the grid/visual
+        };
+    }
+
     /* Public functions                                                                          */
     /*********************************************************************************************/
 
@@ -32,22 +45,24 @@ class Storage {
             newName = `untitled ${index}`;
             index++;
         } while (localStorage.getItem(newName) !== null);
-        localStorage.setItem(newName, DEFAULT_CODE(LOCALE));
+        this.save(newName, DEFAULT_CODE(LOCALE));
         return newName;
     }
 
     rename(oldName, newName) {
         const listing = localStorage.getItem(oldName);
         if (listing !== null) {
-            localStorage.setItem(newName, listing);
+            localStorage.setItem(newName, s);
             localStorage.removeItem(oldName);
         } else {
             throw new Error(`Listing "${oldName}" not found.`);
         }
     }
 
-    save(name, code) {
-        localStorage.setItem(name, code);
+    save(name, code, lang = LANG) {
+        let listing = this._makeListing(code, lang);
+        let s = encode(listing);
+        localStorage.setItem(name, s);
     }
 
     first() {
@@ -58,8 +73,9 @@ class Storage {
     }
 
     retrieve(name) {
-        const listing = localStorage.getItem(name);
-        if (listing !== null) {
+        const s = localStorage.getItem(name);
+        if (s !== null) {
+            let listing = decode(s);
             return listing;
         }
         else {

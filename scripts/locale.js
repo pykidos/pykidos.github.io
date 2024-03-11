@@ -31,7 +31,7 @@ export const LOCALIZATION = {
 };
 
 
-export function getLang() {
+function getLang() {
     return navigator.language.split('-')[0];
 }
 
@@ -58,5 +58,7 @@ export function addLocale(locale) {
 }
 
 
-// This default englisih locale just contains {key: key}.
+export const LANG = getLang();
+
+// This default english locale just contains {key: key}.
 export const LOCALE = getLocale();

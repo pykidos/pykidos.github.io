@@ -122,21 +122,25 @@ class Selector {
         }
 
         // Load the code listings in the storage.
-        try {
-            let code = this.model.storage.retrieve(name);
+        // try {
+        let listing = this.model.storage.retrieve(name);
+        console.log(listing);
 
-            // Show the code in the editor.
-            this.model.editor.setCode(code);
+        // Get the code in the listing object.
+        let code = listing.code;
 
-            // Update the state.
-            this.state.name = name;
+        // Show the code in the editor.
+        this.model.editor.setCode(code);
 
-            // Emit the select event.
-            this.dispatcher.select(this, name);
-        }
-        catch (err) {
-            console.warn(`Code listing ${name} not found.`);
-        }
+        // Update the state.
+        this.state.name = name;
+
+        // Emit the select event.
+        this.dispatcher.select(this, name);
+        // }
+        // catch (err) {
+        //     console.warn(`Code listing ${name} not found.`);
+        // }
     }
 
     new() {
@@ -158,7 +162,7 @@ class Selector {
         this.model.storage.rename(oldName, newName);
 
         // Update the list of items.
-        this._updateAndSelect(this.state.name);
+        this._updateAndSelect(newName);
 
         // Emit the rename event.
         this.dispatcher.rename(this, oldName, newName);

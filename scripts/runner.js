@@ -1,5 +1,5 @@
 import { HEADER, FOOTER, DEFAULT_INTERVAL } from "./constants.js";
-import { getLang, getLocale, addLocale } from "./locale.js";
+import { LANG, getLocale, addLocale } from "./locale.js";
 import { LOCALE } from "./locale.js";
 
 export { Runner };
@@ -101,7 +101,7 @@ class Runner {
 
         // Parse the interval: use the localized variable name.
         // NOTE: use the code metadata instead.
-        let interval = this.get('interval', getLang());
+        let interval = this.get('interval', LANG);
         if (interval)
             this.interval = interval;
 
@@ -118,8 +118,7 @@ class Runner {
         let header = HEADER(LOCALE);
 
         // Add locale aliases.
-        let lang = getLang(); // TODO: take from code metadata instead
-        let locale = getLocale(lang);
+        let locale = getLocale(LANG); // TODO: take from code metadata instead
 
         header += "\n" + addLocale(locale);
         return header;
@@ -143,7 +142,7 @@ class Runner {
     get(varName, lang = null) {
         if (lang) {
             // Use the localized name if a lang is provided.
-            let locale = getLocale(getLang());
+            let locale = getLocale(lang);
             varName = locale[varName];
         }
         return this.globals ? this.globals.toJs().get(varName) : null;
