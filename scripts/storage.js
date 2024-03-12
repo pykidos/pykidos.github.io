@@ -14,6 +14,25 @@ class Storage {
     }
 
     init() {
+        // Load the data URL parameter.
+        const query = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        let data = query.data; // an encoded dictionary mapping listing names to listing objects
+
+        // Decode it.
+        data = data ? decode(data) : {};
+
+        // Save the listings stored in the data.
+        for (const name in data) {
+            if (data.hasOwnProperty(name)) {
+                // NOTE: skip existing names to avoid conflicts and avoid erasing local data
+                if (!localStorage.getItem(name))
+                    this._saveListing(name, data[name])
+            }
+        }
+
+        // Create a new listing if there is none.
         if (this.count() == 0) {
             this.new();
         }
@@ -30,6 +49,13 @@ class Storage {
             "lang": lang,
             "data": data,
         };
+    }
+
+    _saveListing(name, listing) {
+        const code = listing.code;
+        const lang = listing.lang;
+        const data = listing.data;
+        this.save(name, code, lang, data);
     }
 
     /* Public functions                                                                          */
@@ -64,6 +90,7 @@ class Storage {
         let listing = this._makeListing(code, lang, data);
         let s = JSON.stringify(listing);
         localStorage.setItem(name, s);
+        return listing;
     }
 
     first() {

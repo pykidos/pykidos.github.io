@@ -20,14 +20,11 @@ class Panel {
         this.dispatcher = dispatcher;
 
         this.runButton = document.getElementById("run-button");
+        this.shareButton = document.getElementById("share-button");
 
         this.setupDispatcher();
         this.setupRunButton();
-
-        // this.clearButton = document.getElementById("clear-button");
-        // this.stopButton = document.getElementById("stop-button");
-        // this.setupClearButton();
-        // this.setupStopButton();
+        this.setupShareButton();
     }
 
 
@@ -47,18 +44,19 @@ class Panel {
         });
     }
 
+    setupShareButton() {
+        this.shareButton.addEventListener("click", (e) => {
+            const url = this.model.makeURL(this.state.name);
+            console.log("Copying URL:", url);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url);
+                this.shareButton.innerHTML = "Copied!";
+                setTimeout(() => { this.shareButton.innerHTML = "Share"; }, 1500);
+            }
+        });
+    }
+
     setIcon(isPlaying) {
         this.runButton.innerHTML = isPlaying ? PLAY_ICON : STOP_ICON;
     }
-
-    // setupClearButton() {
-    //     this.clearButton.addEventListener("click", (e) => {
-    //         this.dispatcher.clear(this);
-    //     });
-    // }
-    // setupStopButton() {
-    //     this.stopButton.addEventListener("click", (e) => {
-    //         this.dispatcher.stop(this);
-    //     });
-    // }
 };

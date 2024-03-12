@@ -7,7 +7,7 @@ export { State };
 /* Defaults                                                                                      */
 /*************************************************************************************************/
 
-const DEFAULT_PARAM = "";
+const DEFAULT_NAME = "";
 
 
 
@@ -19,21 +19,7 @@ function url2state() {
     let query = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
     });
-    let state = {};
-
-    // Alias states.
-    if (query.alias) {
-        const s = ALIAS_STATES[query.alias];
-        const decodedState = decode(s.state);
-        if (DEBUG)
-            console.log("decoded state", decodedState);
-        state = decodedState;
-    }
-    else if (query.state) {
-        state = decode(query.state);
-    }
-
-    return state;
+    return query.state || {};
 }
 
 
@@ -64,7 +50,7 @@ class State {
     }
 
     init(state) {
-        this.name = state.name || DEFAULT_PARAM;
+        this.name = state.name || DEFAULT_NAME;
         this.isPlaying = false; // NOTE: always start false.
     }
 
