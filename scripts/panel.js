@@ -1,3 +1,5 @@
+import { downloadText } from "./utils.js";
+
 export { Panel };
 
 
@@ -21,10 +23,12 @@ class Panel {
 
         this.runButton = document.getElementById("run-button");
         this.shareButton = document.getElementById("share-button");
+        this.downloadButton = document.getElementById("download-button");
 
         this.setupDispatcher();
         this.setupRunButton();
         this.setupShareButton();
+        this.setupDownloadButton();
     }
 
 
@@ -53,6 +57,14 @@ class Panel {
                 this.shareButton.innerHTML = "Copied!";
                 setTimeout(() => { this.shareButton.innerHTML = "Share"; }, 1500);
             }
+        });
+    }
+
+    setupDownloadButton() {
+        this.downloadButton.addEventListener("click", (e) => {
+            const text = this.model.editor.getCode();
+            const filename = `${this.state.name}.py`;
+            downloadText(text, filename);
         });
     }
 
