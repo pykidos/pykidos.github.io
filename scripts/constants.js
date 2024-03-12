@@ -34,7 +34,7 @@ ${locale.maroon} = (128, 50, 50);
 ${locale.purple} = (150, 100, 220);
 
 # Global variables.
-${locale.interval} = ${DEFAULT_INTERVAL}
+# ${locale.interval} = ${DEFAULT_INTERVAL}
 
 # Grid functions.
 def ${locale.size}(n, m):
@@ -43,6 +43,7 @@ def ${locale.size}(n, m):
 def ${locale.font}(size):
     grid.font(f"{size}pt")
 
+
 def ${locale.color}(i, j, col):
     if callable(col): col = col()
     grid.bgcolor(i, j, *col)
@@ -50,11 +51,13 @@ def ${locale.color}(i, j, col):
 def ${locale.text}(i, j, text):
     grid.text(i, j, text)
 
+
 def ${locale.fill}(col):
     grid.fill(*col)
 
 def ${locale.clear}():
     grid.clear()
+
 
 def ${locale.line}(i, col):
     grid.line(i, *col)

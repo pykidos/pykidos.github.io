@@ -51,7 +51,7 @@ export function addLocale(locale) {
     let result = '';
     for (const key in locale) {
         if (Object.hasOwnProperty.call(locale, key)) {
-            result += `${locale[key]} = ${key}\n`;
+            result += `${locale[key]} = globals().get("${key}", None)\n`;
         }
     }
     return result;

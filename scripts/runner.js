@@ -99,7 +99,7 @@ class Runner {
 
         // Parse the interval: use the localized variable name.
         // NOTE: use the code metadata instead.
-        let interval = this.get('interval', LANG);
+        let interval = this.get('interval', LANG) || this.get('interval');
         if (interval)
             this.interval = interval;
 
@@ -143,6 +143,7 @@ class Runner {
             let locale = getLocale(lang);
             varName = locale[varName];
         }
+        if (!varName) return null;
         return this.globals ? this.globals.toJs().get(varName) : null;
     }
 
