@@ -142,7 +142,7 @@ class Grid {
     /*********************************************************************************************/
 
     dump() {
-        const data = {};
+        const cells = {};
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 const cell = this.cell(i, j);
@@ -153,24 +153,23 @@ class Grid {
                     if ((bgColor == "rgba(0, 0, 0, 0)") && (!text)) continue;
 
                     const rgb = bgColor.match(/\d+/g);
-                    data[`${i},${j}`] = {
+                    cells[`${i},${j}`] = {
                         bgcolor: rgb.map(Number),
                         text: text
                     };
                 }
             }
         }
-        return { "data": data, "rows": this.rows, "cols": this.cols, };
+        return { "cells": cells, "rows": this.rows, "cols": this.cols, };
     }
 
     load(data) {
         if (!data) return;
 
-        // const data = JSON.parse(dataJson);
         this.reshape(data.rows, data.cols);
 
-        for (const key in data.data) {
-            const cellData = data.data[key];
+        for (const key in data.cells) {
+            const cellData = data.cells[key];
             if (!cellData) continue;
             const [i, j] = key.split(',').map(Number);
             const { bgcolor, text } = cellData;

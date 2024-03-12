@@ -62,7 +62,7 @@ class Storage {
 
     save(name, code, lang = LANG, data = null) {
         let listing = this._makeListing(code, lang, data);
-        let s = encode(listing);
+        let s = JSON.stringify(listing);
         localStorage.setItem(name, s);
     }
 
@@ -76,7 +76,7 @@ class Storage {
     retrieve(name) {
         const s = localStorage.getItem(name);
         if (s !== null) {
-            let listing = decode(s);
+            let listing = JSON.parse(s);
             return listing;
         }
         else {
