@@ -72,7 +72,7 @@ class Grid {
         // HACK: found an adequate grid width in "vmin" unit by trial and error.
         let k = clamp((60.0 * m) / n, 1, 60);
         this.grid.style.width = `${k}vmin`;
-        this.font(`calc((30vw + 30vh - 300px) / (2 * ${this.rows}))`);
+        this.font(`calc((30vw + 30vh - 250px) / (2 * ${this.rows}))`);
 
         this.gridTable.style.gridTemplateColumns = `repeat(${m}, 1fr)`;
         this.gridTable.style.gridTemplateRows = `repeat(${n}, 1fr)`;

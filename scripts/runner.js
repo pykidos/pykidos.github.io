@@ -39,6 +39,7 @@ class Runner {
 
     setupDispatcher() {
         this.dispatcher.on("run", (e) => { this.run(e.code); });
+        this.dispatcher.on("select", (e) => { this.stop(); });
 
         this.model.grid.onClick((i, j) => { this.click(i, j); });
         this.model.grid.onKeyboard(key => { this.keyboard(key); });
@@ -82,6 +83,10 @@ class Runner {
         if (reset) {
             this.reset();
         }
+
+        // HACK
+        if (code.includes("numpy"))
+            await this.pyodide.loadPackage("numpy");
 
         // Construct the code.
         let fullCode = this.makeCode(code, addHeader, addFooter);
