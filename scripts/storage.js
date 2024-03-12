@@ -71,7 +71,7 @@ class Storage {
     /*********************************************************************************************/
 
     count() {
-        return localStorage.length;
+        return this.list().length;
     }
 
     new() {
@@ -86,6 +86,10 @@ class Storage {
     }
 
     rename(oldName, newName) {
+        if (oldName.startsWith("__")) {
+            console.error("Listing name cannot start with __");
+            return null;
+        }
         const listing = localStorage.getItem(oldName);
         if (listing !== null) {
             localStorage.setItem(newName, listing);
@@ -96,6 +100,10 @@ class Storage {
     }
 
     save(name, code, lang = LANG, data = null) {
+        if (name.startsWith("__")) {
+            console.error("Listing name cannot start with __");
+            return null;
+        }
         let listing = this._makeListing(code, lang, data);
         let s = JSON.stringify(listing);
         localStorage.setItem(name, s);
@@ -103,7 +111,7 @@ class Storage {
     }
 
     first() {
-        const names = Object.keys(localStorage);
+        const names = this.list();
         if (names.length > 0) {
             return names[0];
         }
@@ -121,7 +129,11 @@ class Storage {
     }
 
     list(order) {
-        const names = Object.keys(localStorage);
+        let names = Object.keys(localStorage);
+
+        // Remove names starting with '__'
+        names = names.filter(name => !name.startsWith('__'));
+
         if (order === 'desc') {
             return names.sort().reverse();
         } else {
@@ -130,7 +142,8 @@ class Storage {
     }
 
     delete(name) {
-        localStorage.removeItem(name);
+        if (!name.startsWith("__"))
+            localStorage.removeItem(name);
     }
 
     dump() {
