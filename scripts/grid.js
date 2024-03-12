@@ -17,8 +17,7 @@ class Grid {
         this.cols = DEFAULT_COLS;
         this.reshape(this.rows, this.cols);
 
-        // this.setupDispatcher();
-        // this.setupKeyboard();
+        this.setupInput();
     }
 
     init() {
@@ -33,10 +32,29 @@ class Grid {
         let row = Math.floor(i / this.rows);
         let col = i % this.rows;
         cell.addEventListener("click", (e) => {
-            // this.dispatcher.click(this, row, col);
+            if (this._onClick) this._onClick(row, col);
         });
         cell.title = `${row}, ${col}`;
         this.gridTable.appendChild(cell);
+    }
+
+    /* Input events                                                                              */
+    /*********************************************************************************************/
+
+    setupInput() {
+        this._onClick = null;
+        this._onKeyboard = null;
+        this.gridTable.addEventListener("keydown", (e) => {
+            if (this._onKeyboard) this._onKeyboard(e.key);
+        });
+    }
+
+    onClick(f) {
+        this._onClick = f;
+    }
+
+    onKeyboard(f) {
+        this._onKeyboard = f;
     }
 
     /* Grid manipulation                                                                         */

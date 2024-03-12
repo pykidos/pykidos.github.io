@@ -39,11 +39,9 @@ class Runner {
 
     setupDispatcher() {
         this.dispatcher.on("run", (e) => { this.run(e.code); });
-        this.dispatcher.on("click", (e) => { this.click(e.row, e.col); });
-        this.dispatcher.on("keyboard", (e) => { this.keyboard(e.key); });
 
-        // this.dispatcher.on("clear", (e) => { this.reset(); });
-        // this.dispatcher.on("stop", (e) => { this.stop(); });
+        this.model.grid.onClick((i, j) => { this.click(i, j); });
+        this.model.grid.onKeyboard(key => { this.keyboard(key); });
     }
 
     /* Output functions                                                                          */
@@ -241,11 +239,13 @@ class Runner {
     /*********************************************************************************************/
 
     click(row, col) {
+        // console.log("click", row, col);
         if (this.has("click"))
             this._run(`click(${row}, ${col})`, false, false, false);
     }
 
     keyboard(key) {
+        // console.log("keyboard", key);
         if (this.has("keyboard"))
             this._run(`keyboard("${key}")`, false, false, false);
     }
