@@ -190,8 +190,12 @@ emoji-picker.visible {
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 12pt;
     transition: color 0.3s ease;
+}
+
+.control-panel button#run-button {
+    font-size: 16pt;
 }
 
 .control-panel button:hover {
