@@ -78,6 +78,11 @@ html {
     margin-bottom: 10px;
 }
 
+#emoji-button {
+    text-decoration: none;
+    font-size: 14pt;
+}
+
 emoji-picker {
     display: none;
     position: absolute;
@@ -91,7 +96,7 @@ emoji-picker.visible {
 }
 
 #color-button {
-    width: 100px;
+    width: 150px;
 }
 
 

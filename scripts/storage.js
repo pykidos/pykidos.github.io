@@ -1,6 +1,6 @@
 import { DEFAULT_CODE, DEFAULT_VISUAL, DEFAULT_VERSION } from "./constants.js";
 import { LANG, LOCALE } from "./locale.js";
-import { encode, decode } from "./utils.js";
+import { decode, downloadText } from "./utils.js";
 
 export { Storage };
 
@@ -122,5 +122,15 @@ class Storage {
 
     delete(name) {
         localStorage.removeItem(name);
+    }
+
+    dump() {
+        let dump = {};
+        for (let name of this.list()) {
+            dump[name] = this.retrieve(name);
+        }
+        let text = JSON.stringify(dump, null, 2);
+        downloadText(text, "listings.json");
+        return dump;
     }
 };

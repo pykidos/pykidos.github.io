@@ -72,7 +72,7 @@ class Grid {
         // HACK: found an adequate grid width in "vmin" unit by trial and error.
         let k = clamp((60.0 * m) / n, 1, 60);
         this.grid.style.width = `${k}vmin`;
-        this.font(`calc((95vw - 300px) / (2 * ${this.rows}))`);
+        this.font(`calc((30vw + 30vh - 300px) / (2 * ${this.rows}))`);
 
         this.gridTable.style.gridTemplateColumns = `repeat(${m}, 1fr)`;
         this.gridTable.style.gridTemplateRows = `repeat(${n}, 1fr)`;
@@ -168,11 +168,13 @@ class Grid {
                     const bgColor = getComputedStyle(cell).getPropertyValue('background-color');
                     const text = cell.textContent.trim();
 
-                    if ((bgColor == "rgba(0, 0, 0, 0)") && (!text)) continue;
+                    const emptyColor = bgColor == "rgba(0, 0, 0, 0)";
+                    if (emptyColor && !text)
+                        continue;
 
                     const rgb = bgColor.match(/\d+/g);
                     cells[`${i},${j}`] = {
-                        bgcolor: rgb.map(Number),
+                        bgcolor: emptyColor ? null : rgb.map(Number),
                         text: text
                     };
                 }
@@ -191,8 +193,10 @@ class Grid {
             if (!cellData) continue;
             const [i, j] = key.split(',').map(Number);
             const { bgcolor, text } = cellData;
-            this.bgcolor(i, j, ...bgcolor);
-            this.text(i, j, text);
+            if (bgcolor)
+                this.bgcolor(i, j, ...bgcolor);
+            if (text)
+                this.text(i, j, text);
         }
     }
 };
