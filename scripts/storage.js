@@ -70,6 +70,18 @@ class Storage {
     /* Public functions                                                                          */
     /*********************************************************************************************/
 
+    storeMetadata(key, value) {
+        if (key.startsWith("__")) {
+            localStorage.setItem(key, value);
+        }
+    }
+
+    loadMetadata(key) {
+        if (key.startsWith("__")) {
+            return localStorage.getItem(key);
+        }
+    }
+
     count() {
         return this.list().length;
     }

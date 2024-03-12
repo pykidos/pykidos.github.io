@@ -24,8 +24,9 @@ class Selector {
         let names = this.model.storage.list();
 
         let first = names ? names[0] : null;
+        let stored = this.model.storage.loadMetadata("__name__");
 
-        this.state.name = this.state.name || first;
+        this.state.name = this.state.name || stored || first;
 
         // Set the selector list with those names.
         this.setNames(names, this.state.name);
@@ -136,6 +137,8 @@ class Selector {
 
         // Update the state.
         this.state.name = name;
+
+        this.model.storage.storeMetadata("__name__", name);
 
         // Emit the select event.
         this.dispatcher.select(this, name);
