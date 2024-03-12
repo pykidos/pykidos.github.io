@@ -1,3 +1,7 @@
+/*************************************************************************************************/
+/* General                                                                                       */
+/*************************************************************************************************/
+
 #dispatcher {
     width: 0;
     height: 0;
@@ -19,6 +23,11 @@ html {
     font-family: Roboto, sans-serif;
     font-size: 12pt;
 }
+
+
+/*************************************************************************************************/
+/* Layout                                                                                        */
+/*************************************************************************************************/
 
 .container {
     display: flex;
@@ -53,50 +62,16 @@ html {
     flex-grow: 1;
 }
 
-#buttons-bar {
-    position: relative;
-}
-
-emoji-picker {
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 100;
-}
-
-emoji-picker.visible {
-    display: block;
-}
-
-#color-button {
-    width: 22px;
-}
-
-#code-editor {
-    height: 100%;
-    /* font-size: 12pt; */
-}
-
-.control-panel {
-    height: 30px;
-    max-height: 30px;
-    overflow: hidden;
-}
-
-#terminal-output {
-    font-family: monospace;
-    resize: none;
+.right-panel .subpanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
-#terminal-output.error {
-    background-color: #dc7373;
-}
-
-#new-item {
-    /* background-color: #eee; */
-}
+/*************************************************************************************************/
+/* Selector                                                                                      */
+/*************************************************************************************************/
 
 .item {
     display: flex;
@@ -139,11 +114,57 @@ emoji-picker.visible {
 }
 
 
-.right-panel .subpanel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/*************************************************************************************************/
+/* Top buttons                                                                                   */
+/*************************************************************************************************/
+
+#buttons-bar {
+    position: relative;
 }
+
+emoji-picker {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+emoji-picker.visible {
+    display: block;
+}
+
+#color-button {
+    width: 100px;
+}
+
+
+/*************************************************************************************************/
+/* Code editor                                                                                   */
+/*************************************************************************************************/
+
+#code-editor {
+    height: 100%;
+}
+
+
+/*************************************************************************************************/
+/* Terminal output                                                                               */
+/*************************************************************************************************/
+
+#terminal-output {
+    font-family: monospace;
+    resize: none;
+}
+
+#terminal-output.error {
+    background-color: #dc7373;
+}
+
+
+/*************************************************************************************************/
+/* Grid                                                                                          */
+/*************************************************************************************************/
 
 #grid {
     width: 30vmin;
@@ -178,7 +199,15 @@ emoji-picker.visible {
 }
 
 
+/*************************************************************************************************/
+/* Control panel                                                                                 */
+/*************************************************************************************************/
 
+.control-panel {
+    height: 30px;
+    max-height: 30px;
+    overflow: hidden;
+}
 
 .control-panel {
     display: flex;
@@ -202,6 +231,10 @@ emoji-picker.visible {
     color: #007bff;
 }
 
+
+/*************************************************************************************************/
+/* Credits                                                                                       */
+/*************************************************************************************************/
 
 #credits,
 #credits * {

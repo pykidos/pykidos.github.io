@@ -14,8 +14,10 @@ export const DEFAULT_VERSION = 1;
 export const HEADER = (locale) => `
 import js
 
+# Python "pointer" to the Grid Javascript object.
 grid = js.window.app.model.grid
 
+# Colors.
 ${locale.black} = (0, 0, 0)
 ${locale.white} = (255, 255, 255)
 def ${locale.gray}(level=128):
@@ -31,22 +33,10 @@ ${locale.pink} = (255, 150, 180);
 ${locale.maroon} = (128, 50, 50);
 ${locale.purple} = (150, 100, 220);
 
-# ${locale.red} = (255, 0, 0)
-# ${locale.green} = (0, 255, 0)
-# ${locale.blue} = (0, 0, 255)
-# ${locale.yellow} = (255, 255, 0)
-# ${locale.orange} = (255, 100, 0)
-# ${locale.teal} = (70, 200, 200);
-# ${locale.peach} = (255, 180, 150);
-# ${locale.limeGreen} = (180, 240, 100);
-# ${locale.skyBlue} = (135, 206, 235);
-# ${locale.lavender} = (200, 150, 220);
-# ${locale.mint} = (170, 255, 195);
-# ${locale.navy} = (0, 70, 130);
-# ${locale.olive} = (128, 128, 0);
-# ${locale.coral} = (255, 127, 80);
-# ${locale.aqua} = (127, 255, 212);
+# Global variables.
+${locale.interval} = ${DEFAULT_INTERVAL}
 
+# Grid functions.
 def ${locale.size}(n, m):
     grid.reshape(n, m)
 
@@ -77,14 +67,11 @@ def ${locale.diagonal}(k, col):
 
 def ${locale.block}(i0, j0, i1, j1, col):
     grid.block(i0, j0, i1, j1, *col)
-
-${locale.interval} = ${DEFAULT_INTERVAL}
-
 `;
 
 // HACK: this is to force the sys.stdout to be flushed.
 export const FOOTER = `print("\\n")\n`;
 
-export const DEFAULT_CODE = (locale) => `for i in range(${DEFAULT_ROWS}):
-    ${locale.color}(i, i, ${locale.red})
+export const DEFAULT_CODE = (locale) => `print("Hello world!")
+${locale.color}(0, 0, ${locale.red})
 `;
