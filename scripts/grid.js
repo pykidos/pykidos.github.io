@@ -13,8 +13,8 @@ class Grid {
     constructor() {
         this.grid = document.getElementById('grid');
         this.gridTable = document.getElementById('grid-table');
-        this.rows = DEFAULT_ROWS;
-        this.cols = DEFAULT_COLS;
+        this.rows = 0;// DEFAULT_ROWS;
+        this.cols = 0;//DEFAULT_COLS;
         this.reshape(this.rows, this.cols);
 
         this.setupInput();
@@ -61,12 +61,20 @@ class Grid {
     /*********************************************************************************************/
 
     reshape(n, m) {
-        n = this.rows = clamp(Math.round(n), 1, MAX_ROWS);
-        m = this.cols = clamp(Math.round(m), 1, MAX_COLS);
+        if ((n == this.rows) && (m == this.cols)) return;
+
+        console.log(`Grid reshape to (${n}, ${m}).`);
 
         // Clear the grid.
         while (this.gridTable.firstChild) {
             this.gridTable.removeChild(this.gridTable.firstChild);
+        }
+
+        n = this.rows = clamp(Math.round(n), 1, MAX_ROWS);
+        m = this.cols = clamp(Math.round(m), 1, MAX_COLS);
+
+        for (let i = 0; i < n * m; i++) {
+            this._createCell(i);
         }
 
         // HACK: found an adequate grid width in "vmin" unit by trial and error.
@@ -77,13 +85,17 @@ class Grid {
         this.gridTable.style.gridTemplateColumns = `repeat(${m}, 1fr)`;
         this.gridTable.style.gridTemplateRows = `repeat(${n}, 1fr)`;
 
-        for (let i = 0; i < n * m; i++) {
-            this._createCell(i);
-        }
     }
 
     clear() {
-        this.reshape(this.rows, this.cols);
+        console.log("Clear the grid.");
+        for (let i = 0; i < this.rows * this.cols; i++) {
+            const cell = this.gridTable.children[i];
+            if (cell && cell.style) {
+                cell.style.backgroundColor = "";
+                cell.textContent = "";
+            }
+        }
     }
 
     /* Global functions                                                                          */
@@ -100,21 +112,34 @@ class Grid {
         i = Math.floor(i);
         j = Math.floor(j);
         if (0 <= i && i < this.rows && 0 <= j && j < this.cols)
-            return this.gridTable.childNodes[i * this.rows + j];
+            return this.gridTable.children[i * this.rows + j];
     }
 
     bgcolor(i, j, r, g, b) {
-        // NOTE: if not rgb, return the bg color
         let cell = this.cell(i, j);
-        if (cell)
+        if (cell && cell.style && r != null && r != undefined) {
             cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // NOTE: if not rgb, return the bg color
+        if (r == null || r == undefined) {
+            const bgcolor = cell ? cell.style.backgroundColor : "";
+            if (!bgcolor) return null;
+            const [r, g, b] = bgcolor.match(/\d+/g).map(Number);
+            return [r, g, b];
+        }
     }
 
     text(i, j, string) {
-        // NOTE: if string is undefined, return the text
         let cell = this.cell(i, j);
-        if (cell)
+        if (cell && string != null && string != undefined) {
             cell.textContent = string;
+        }
+
+        // NOTE: if string is undefined, return the text
+        if (string == null || string == undefined) {
+            return cell.textContent;
+        }
     }
 
     /* Multi-cell functions                                                                      */
@@ -186,6 +211,7 @@ class Grid {
     load(data) {
         if (!data) return;
 
+        this.clear();
         this.reshape(data.rows, data.cols);
 
         for (const key in data.cells) {

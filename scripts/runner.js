@@ -26,7 +26,6 @@ class Runner {
 
     async init() {
         this.pyodide = await loadPyodide();
-        this.reset();
         this.pyodide.setStdout({
             batched: (text) => {
                 this.stdout(text);
@@ -39,19 +38,37 @@ class Runner {
 
     setupDispatcher() {
         this.dispatcher.on("run", (e) => { this.run(e.code); });
-        this.dispatcher.on("select", (e) => { this.stop(); });
+        this.dispatcher.on("select", async (e) => {
+            // Clear global variables when selecting a new listing.
+            this.clearGlobals();
+            this.clearOutput();
+        });
 
         this.model.grid.onClick((i, j) => { this.click(i, j); });
         this.model.grid.onKeyboard(key => { this.keyboard(key); });
     }
 
-    /* Output functions                                                                          */
+    /* Clearing                                                                                  */
     /*********************************************************************************************/
 
     clearOutput() {
         this.outputElement.textContent = "";
         this.outputElement.classList.remove("error");
     }
+
+    clearGlobals() {
+        if (!this.pyodide) return;
+
+        // Clear the global variables.
+        this.globals = this.pyodide.toPy({});
+    }
+
+    clearGrid() {
+        this.model.grid.clear();
+    }
+
+    /* Output functions                                                                          */
+    /*********************************************************************************************/
 
     scrollOutput() {
         this.outputElement.scrollTop = this.outputElement.scrollHeight;
@@ -73,16 +90,9 @@ class Runner {
     /* Internal functions                                                                        */
     /*********************************************************************************************/
 
-    async _run(code, reset = true, addHeader = true, addFooter = true) {
+    async _run(code, addHeader = true, addFooter = true) {
         // Start the spinning cursor.
         this.dispatcher.spinning(this, true);
-
-        // Lazily initialize the pyodide engine.
-        if (!this.pyodide) await this.init();
-
-        if (reset) {
-            this.reset();
-        }
 
         // HACK
         if (code.includes("numpy"))
@@ -159,21 +169,6 @@ class Runner {
     /* Runner                                                                                    */
     /*********************************************************************************************/
 
-    reset() {
-        // Stop and clear both the global variables and the grid.
-        this.state.isPlaying = false;
-        if (!this.pyodide) return;
-
-        // Clear the global variables.
-        this.globals = this.pyodide.toPy({});
-
-        // Clear the standard output.
-        this.clearOutput();
-
-        // Emit the clear event, which will clear the grid.
-        this.model.grid.clear();
-    }
-
     async run(code) {
         if (!code) return;
         let out = null;
@@ -195,6 +190,14 @@ class Runner {
     }
 
     async start(code) {
+        // Lazily initialize the pyodide engine.
+        if (!this.pyodide) await this.init();
+
+        // Clear everything.
+        this.clearOutput();
+        this.clearGlobals();
+        this.clearGrid();
+
         // Run the code.
         let out = await this._run(code);
 
@@ -235,7 +238,7 @@ class Runner {
         if (!this.state.isPlaying) return;
 
         if (this.has("frame")) {
-            let out = await this._run(`frame(${i})`, false, false, false);
+            let out = await this._run(`frame(${i})`, false, false, false, false);
             if (out != false)
                 setTimeout(() => { this.frame(i + 1); }, this.interval * 1000);
         }
@@ -247,12 +250,12 @@ class Runner {
     click(row, col) {
         // console.log("click", row, col);
         if (this.has("click"))
-            this._run(`click(${row}, ${col})`, false, false, false);
+            this._run(`click(${row}, ${col})`, false, false, false, false);
     }
 
     keyboard(key) {
         // console.log("keyboard", key);
         if (this.has("keyboard"))
-            this._run(`keyboard("${key}")`, false, false, false);
+            this._run(`keyboard("${key}")`, false, false, false, false);
     }
 };

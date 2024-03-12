@@ -114,8 +114,8 @@ class Selector {
         console.log(`Select code listing "${name}".`);
 
         // Add the selected CSS class only on the selected item.
-        for (let child of this.el.childNodes) {
-            if (child.childNodes[0].innerHTML != name)
+        for (let child of this.el.children) {
+            if (child.children[0].innerHTML != name)
                 child.classList.remove('selected');
             else
                 child.classList.add('selected');
@@ -139,10 +139,6 @@ class Selector {
 
         // Emit the select event.
         this.dispatcher.select(this, name);
-        // }
-        // catch (err) {
-        //     console.warn(`Code listing ${name} not found.`);
-        // }
     }
 
     new() {

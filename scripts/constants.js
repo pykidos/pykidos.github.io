@@ -44,12 +44,14 @@ def ${locale.font}(size):
     grid.font(f"{size}pt")
 
 
-def ${locale.color}(i, j, col):
+def ${locale.color}(i, j, col=()):
     if callable(col): col = col()
-    grid.bgcolor(i, j, *col)
+    output = grid.bgcolor(i, j, *col)
+    return tuple(output) if output else None
 
-def ${locale.text}(i, j, text):
-    grid.text(i, j, text)
+def ${locale.text}(i, j, text=None):
+    output = grid.text(i, j, text)
+    return str(output) if output else ""
 
 
 def ${locale.fill}(col):
