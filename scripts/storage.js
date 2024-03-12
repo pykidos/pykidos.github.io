@@ -1,6 +1,6 @@
 import { DEFAULT_CODE, DEFAULT_VISUAL, DEFAULT_VERSION } from "./constants.js";
 import { LANG, LOCALE } from "./locale.js";
-import { decode, downloadText } from "./utils.js";
+import { decode, downloadText, downloadJSON } from "./utils.js";
 
 export { Storage };
 
@@ -13,7 +13,7 @@ class Storage {
     constructor() {
     }
 
-    init() {
+    async init() {
         // Load the data URL parameter.
         const query = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
@@ -22,20 +22,18 @@ class Storage {
 
         // Decode it.
         data = data ? decode(data) : {};
-
-        // Save the listings stored in the data.
-        for (const name in data) {
-            if (data.hasOwnProperty(name)) {
-                // NOTE: skip existing names to avoid conflicts and avoid erasing local data
-                if (!localStorage.getItem(name))
-                    this._saveListing(name, data[name])
-            }
-        }
+        this._importListings(data);
 
         // Create a new listing if there is none.
         if (this.count() == 0) {
-            this.new();
+            await this.loadInitial();
         }
+    }
+
+    async loadInitial() {
+        console.log("Log initial data from local JSON file");
+        const data = await downloadJSON("../data/listings.json");
+        this._importListings(data);
     }
 
     /* Internal functions                                                                        */
@@ -56,6 +54,17 @@ class Storage {
         const lang = listing.lang;
         const data = listing.data;
         this.save(name, code, lang, data);
+    }
+
+    _importListings(data) {
+        // Save the listings stored in the data.
+        for (const name in data) {
+            if (data.hasOwnProperty(name)) {
+                // NOTE: skip existing names to avoid conflicts and avoid erasing local data
+                if (!localStorage.getItem(name))
+                    this._saveListing(name, data[name])
+            }
+        }
     }
 
     /* Public functions                                                                          */

@@ -1,0 +1,3250 @@
+{
+  "0. 🐍 Tutorial": {
+    "visual": "grid",
+    "version": 1,
+    "code": "# Welcome to PyKidos! This is a quick-and-dirty Javascript application\n# that provides a Python playground running entirely in the browser, which\n# is convenient for teaching purposes. The grid on the right can be manipulated\n# from Python, the color and text in each cell can be set from Python.\n# PyKidos also supports grid animations, click and keyboard events.\n# Kids (and adults) can program toy games to learn basic Python coding skills.\n# You have a few examples on the right, and you can create your own scripts for\n# your kids or for yourself!\n\n# This Python script provides a quick tutorial. Press Control+Enter to run it.\n# You can download the script by clicking on Download at the bottom right. \n\n# The standard output is displayed in the bottom right panel.\nprint(\"Hello world!\")\n\n# Grid cells are 0-indexed. This is how you update a cell's color.\n# There are a few common colors predefined as global variables.\ncolor(0, 1, red)\n\n# You can resize the grid as follows (this will clear the grid first).\n# size(12, 12)\n\n# You can enter arbitrary colors as RGB triplets (numbers in 0-255). You can\n# use the color picker at the top.\nfor j in range(2, 5):\n    color(0, j, (255, 180, 5))\n\n# You can also write one short strings in cells.\ntext(0, 6, \"Hi!\")\n\n# Use the emoji selector at the top to write Unicode emojis.\ntext(0, 8, \"🍎\")\n\n# You can change the default size as follows:\n# font(12)\n\n# This function clears the grid:\n# clear()\n\n# This one fills all cells with a given color:\n# fill(black)\n\n# Some cell manipulation functions:\nline(9, yellow)\ncolumn(9, green)\nblock(2, 2, 7, 7, gray(200))\ndiagonal(0, gray(240))\n\n\n# Now, you can easily create animations by defining this special function:\nicon = \"🍎\"\ndef frame(idx):\n    # idx is the frame number: 0, 1, 2...\n    text((idx - 1) % 10, 8, \"\")\n    text(idx % 10, 8, icon)\n\n# You can modify the time interval between frames as follows:\ninterval = 0.2 # in seconds\n\n\n# You can react to cell clicks as follows:\ndef click(i, j):\n    print(f\"You clicked on cell {i, j}.\")\n\n\n# You can react to key presses as follows:\ndef keyboard(key):\n    # Press the Left key or Right key to change the moving fruit.\n    global icon\n    if key == \"ArrowLeft\":\n        icon = \"🍐\"\n    if key == \"ArrowRight\":\n        icon = \"🍓\"\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "0,0": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "0,1": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "0,2": {
+          "bgcolor": [
+            255,
+            180,
+            5
+          ],
+          "text": ""
+        },
+        "0,3": {
+          "bgcolor": [
+            255,
+            180,
+            5
+          ],
+          "text": ""
+        },
+        "0,4": {
+          "bgcolor": [
+            255,
+            180,
+            5
+          ],
+          "text": ""
+        },
+        "0,6": {
+          "bgcolor": null,
+          "text": "Hi!"
+        },
+        "0,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "1,1": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "1,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "2,2": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "2,3": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "2,4": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "2,5": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "2,6": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "2,8": {
+          "bgcolor": null,
+          "text": "🍎"
+        },
+        "2,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "3,2": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "3,3": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "3,4": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "3,5": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "3,6": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "3,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "4,2": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "4,3": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "4,4": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "4,5": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "4,6": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "4,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "5,2": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "5,3": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "5,4": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "5,5": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "5,6": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "5,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "6,2": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "6,3": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "6,4": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "6,5": {
+          "bgcolor": [
+            200,
+            200,
+            200
+          ],
+          "text": ""
+        },
+        "6,6": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "6,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "7,7": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "7,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "8,8": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        },
+        "8,9": {
+          "bgcolor": [
+            80,
+            200,
+            120
+          ],
+          "text": ""
+        },
+        "9,0": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,1": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,2": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,3": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,4": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,5": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,6": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,7": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,8": {
+          "bgcolor": [
+            255,
+            230,
+            100
+          ],
+          "text": ""
+        },
+        "9,9": {
+          "bgcolor": [
+            240,
+            240,
+            240
+          ],
+          "text": ""
+        }
+      },
+      "rows": 10,
+      "cols": 10
+    }
+  },
+  "1. 🔳 Checkerboard": {
+    "visual": "grid",
+    "version": 1,
+    "code": "n = 8\nsize(n, n)\n\nfor i in range(n):\n    for j in range(n):\n        color(i, j, white if (i + j) % 2 == 0 else black)\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "0,0": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "0,1": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "0,2": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "0,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "0,4": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "0,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "0,6": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "0,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "1,0": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "1,1": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "1,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "1,3": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "1,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "1,5": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "1,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "1,7": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "2,0": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "2,1": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "2,2": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "2,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "2,4": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "2,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "2,6": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "2,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,0": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,1": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "3,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,3": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "3,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,5": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "3,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,7": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "4,0": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "4,1": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "4,2": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "4,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "4,4": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "4,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "4,6": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "4,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,0": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,1": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "5,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,3": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "5,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,5": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "5,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,7": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "6,0": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "6,1": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "6,2": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "6,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "6,4": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "6,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "6,6": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "6,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,0": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,1": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "7,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,3": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "7,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,5": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "7,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,7": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        }
+      },
+      "rows": 8,
+      "cols": 8
+    }
+  },
+  "2. 🔴 Disc": {
+    "visual": "grid",
+    "version": 1,
+    "code": "import numpy as np\n\nn = 19\nsize(n, n)\n\ncenter = n // 2\nradius = n // 2\n\nc = np.array(red)\n\n# Antialiased disc using a signed distance function.\nfor i in range(n):\n    for j in range(n):\n        distance = np.sqrt((i - center) ** 2 + (j - center) ** 2)\n        if distance <= radius:\n            alpha = 1.0 - (distance - (radius - 1))\n            alpha = np.clip(alpha, 0, 1)\n            color(i, j, (c * alpha + 255 * (1 - alpha)))\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "0,9": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "1,5": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "1,6": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "1,7": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "1,8": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "1,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "1,10": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "1,11": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "1,12": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "1,13": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "2,4": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "2,5": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "2,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "2,13": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "2,14": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "3,3": {
+          "bgcolor": [
+            242,
+            170,
+            170
+          ],
+          "text": ""
+        },
+        "3,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "3,15": {
+          "bgcolor": [
+            242,
+            170,
+            170
+          ],
+          "text": ""
+        },
+        "4,2": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "4,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "4,16": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "5,1": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "5,2": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "5,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "5,16": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "5,17": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "6,1": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "6,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "6,17": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "7,1": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "7,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "7,17": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "8,1": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "8,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "8,17": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "9,0": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "9,1": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,17": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "9,18": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        },
+        "10,1": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "10,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "10,17": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "11,1": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "11,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "11,17": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "12,1": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "12,2": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,16": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "12,17": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "13,1": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "13,2": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "13,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "13,16": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "13,17": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "14,2": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "14,3": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,15": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "14,16": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "15,3": {
+          "bgcolor": [
+            242,
+            170,
+            170
+          ],
+          "text": ""
+        },
+        "15,4": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,5": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,13": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,14": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "15,15": {
+          "bgcolor": [
+            242,
+            170,
+            170
+          ],
+          "text": ""
+        },
+        "16,4": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "16,5": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "16,6": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,7": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,8": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,10": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,11": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,12": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "16,13": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "16,14": {
+          "bgcolor": [
+            245,
+            189,
+            189
+          ],
+          "text": ""
+        },
+        "17,5": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "17,6": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "17,7": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "17,8": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "17,9": {
+          "bgcolor": [
+            230,
+            90,
+            90
+          ],
+          "text": ""
+        },
+        "17,10": {
+          "bgcolor": [
+            232,
+            100,
+            100
+          ],
+          "text": ""
+        },
+        "17,11": {
+          "bgcolor": [
+            236,
+            131,
+            131
+          ],
+          "text": ""
+        },
+        "17,12": {
+          "bgcolor": [
+            244,
+            180,
+            180
+          ],
+          "text": ""
+        },
+        "17,13": {
+          "bgcolor": [
+            254,
+            246,
+            246
+          ],
+          "text": ""
+        },
+        "18,9": {
+          "bgcolor": [
+            255,
+            255,
+            255
+          ],
+          "text": ""
+        }
+      },
+      "rows": 19,
+      "cols": 19
+    }
+  },
+  "3. ❌️ Tic-tac-toe": {
+    "visual": "grid",
+    "version": 1,
+    "code": "size(3, 3)\nstep = 0\ndef click(i, j):\n    global step\n    if not text(i, j):\n        text(i, j, \"🔵️\" if step % 2 == 0 else \"❌️\")\n        step += 1\n    # Exercise left to the reader: detect a win.\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "0,1": {
+          "bgcolor": null,
+          "text": "❌️"
+        },
+        "1,1": {
+          "bgcolor": null,
+          "text": "🔵️"
+        }
+      },
+      "rows": 3,
+      "cols": 3
+    }
+  },
+  "4. 🧬 Game of Life": {
+    "visual": "grid",
+    "version": 1,
+    "code": "import numpy as np\n\nn = 15\nsize(n, n)\n\n# Game of life implementation with NumPy.\ndef count_neighbors(X):\n    n = X.shape[0]\n    neighbor_count = np.zeros_like(X, dtype=np.int32)\n    for i in range(n):\n        for j in range(n):\n            neighbors_i = [(i - 1) % n, i, (i + 1) % n]\n            neighbors_j = [(j - 1) % n, j, (j + 1) % n]\n            neighbor_count[i, j] = np.sum(X[neighbors_i, :][:, neighbors_j]) - X[i, j]\n    return neighbor_count\n\ndef next_generation(X):\n    neighbor_count = count_neighbors(X)\n    new_grid = np.zeros_like(X)\n    new_grid[(X) & (neighbor_count < 2)] = 0\n    new_grid[(X) & ((neighbor_count == 2) | (neighbor_count == 3))] = 1\n    new_grid[(X) & (neighbor_count > 3)] = 0\n    new_grid[(~X) & (neighbor_count == 3)] = 1\n    return new_grid\n\ndef show_grid(X):\n    clear()\n    for i in range(n):\n        for j in range(n):\n            if X[i, j]: color(i, j, black)\n\n# Initial conditions.\nA = np.zeros((n, n), dtype=bool)\nglider = np.array([[0, 1, 0],\n                   [0, 0, 1],\n                   [1, 1, 1]])\nA[:3, :3] = glider\nA[2:5, 5:8] = glider\nA[4:7, 10:13] = glider\nA[8:11, 2:5] = glider\n\n# Animation.\ninterval = .02\n\ndef frame(idx):\n    global A\n    A = next_generation(A)\n    show_grid(A)\n\nshow_grid(A)\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "1,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "2,0": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "2,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,1": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "4,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "4,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,7": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,12": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "6,10": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "6,12": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,11": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "7,12": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "9,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "10,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "10,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "11,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "11,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        }
+      },
+      "rows": 15,
+      "cols": 15
+    }
+  },
+  "5. 🐰 Bunny": {
+    "visual": "grid",
+    "version": 1,
+    "code": "n = 7\nsize(n, n)\nfont(32)\n\nd = {\n    \"ArrowRight\": (0, +1),\n    \"ArrowLeft\": (0, -1),\n    \"ArrowUp\": (-1, 0),\n    \"ArrowDown\": (+1, 0),\n}\n\nbunny = 1, 3\ncarrot = (5, 6)\n\ndef show():\n    clear()\n    block(3, 2, 4, n, black)\n    text(*bunny, \"🐰\")\n    if bunny != carrot:\n        text(*carrot, \"🥕\")\n    else:\n        print(\"You win!\")\n\ndef keyboard(key):\n    global bunny\n    i, j = bunny\n    \n    dd = d.get(key, None)\n    if dd:\n        di, dj = dd\n        i += di\n        j += dj\n        i = max(0, min(i, n-1))\n        j = max(0, min(j, n-1))\n        if color(i, j) != (0, 0, 0):\n            bunny = (i, j)\n    show()\n\nshow()\n",
+    "lang": "fr",
+    "data": {
+      "cells": {
+        "1,3": {
+          "bgcolor": null,
+          "text": "🐰"
+        },
+        "3,2": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,3": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,4": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,5": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "3,6": {
+          "bgcolor": [
+            0,
+            0,
+            0
+          ],
+          "text": ""
+        },
+        "5,6": {
+          "bgcolor": null,
+          "text": "🥕"
+        }
+      },
+      "rows": 7,
+      "cols": 7
+    }
+  }
+}

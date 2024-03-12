@@ -49,3 +49,16 @@ export function downloadText(text, filename) {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 }
+
+export async function downloadJSON(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to download JSON: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error downloading JSON:', error);
+        throw error; // Propagate the error to the caller
+    }
+}
