@@ -112,7 +112,7 @@ class Selector {
 
         if (!name) return;
 
-        console.log(`Select code listing "${name}".`);
+        console.log(`Select code listing: "${name}".`);
 
         // Add the selected CSS class only on the selected item.
         for (let child of this.el.children) {

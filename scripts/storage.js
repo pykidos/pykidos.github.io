@@ -67,7 +67,7 @@ class Storage {
         }
     }
 
-    /* Public functions                                                                          */
+    /* Metadata                                                                                  */
     /*********************************************************************************************/
 
     storeMetadata(key, value) {
@@ -81,6 +81,9 @@ class Storage {
             return localStorage.getItem(key);
         }
     }
+
+    /* Public functions                                                                          */
+    /*********************************************************************************************/
 
     count() {
         return this.list().length;

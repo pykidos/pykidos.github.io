@@ -27,6 +27,7 @@ class Model {
     }
 
     save(name) {
+        console.log(`Saving code listing: "${name}".`);
         const code = this.editor.getCode();
         const lang = LANG;
         const data = this.grid.dump();

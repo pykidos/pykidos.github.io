@@ -205,7 +205,12 @@ class Grid {
                 }
             }
         }
-        return { "cells": cells, "rows": this.rows, "cols": this.cols, };
+        return {
+            "rows": this.rows,
+            "cols": this.cols,
+            "cells": cells,
+            "fontSize": this.gridTable.style.fontSize,
+        };
     }
 
     load(data) {
@@ -213,6 +218,8 @@ class Grid {
 
         this.clear();
         this.reshape(data.rows, data.cols);
+        if (data.fontSize)
+            this.font(data.fontSize);
 
         for (const key in data.cells) {
             const cellData = data.cells[key];
