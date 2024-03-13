@@ -33,6 +33,11 @@ class Editor {
         // Show/hide the emoji picker.
         this.emojiButton.addEventListener("click", (e) => {
             this.emojiPicker.classList.toggle("visible");
+
+            // Automatically focus the emoji picker search text box.
+            const input = app.model.editor.emojiPicker.shadowRoot.getElementById("search");
+            if (input)
+                input.focus();
         });
     }
 
@@ -47,6 +52,12 @@ class Editor {
         // Hide the picker when the focus is out.
         this.emojiPicker.addEventListener('focusout', (e) => {
             this.emojiPicker.classList.remove("visible");
+        });
+
+        // Hide the picker when pressing Escape.
+        this.emojiPicker.addEventListener('keydown', (e) => {
+            if (e.key == "Escape")
+                this.emojiPicker.classList.remove("visible");
         });
     }
 
