@@ -259,6 +259,7 @@ class Runner {
     async _firstRun() {
         // Run the code if it hasn't run yet.
         if (!this.hasGlobals) {
+            this.clearGlobals();
             this.clearOutput();
             this.clearGrid();
 
