@@ -24,6 +24,20 @@ html {
     font-size: 12pt;
 }
 
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 12pt;
+    transition: color 0.3s ease;
+}
+
+button:hover {
+    color: #007bff;
+}
+
+
+
 
 /*************************************************************************************************/
 /* Layout                                                                                        */
@@ -221,21 +235,10 @@ emoji-picker.visible {
     align-items: center;
 }
 
-.control-panel button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 12pt;
-    transition: color 0.3s ease;
-}
-
 .control-panel button#run-button {
     font-size: 16pt;
 }
 
-.control-panel button:hover {
-    color: #007bff;
-}
 
 
 /*************************************************************************************************/

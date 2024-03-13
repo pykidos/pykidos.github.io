@@ -10,19 +10,22 @@ class Editor {
         this.emojiButton = document.getElementById("emoji-button");
         this.emojiPicker = document.getElementById("emoji-picker");
         this.colorButton = document.getElementById("color-button");
+        this.increaseFontSizeButton = document.getElementById("increase-font-size-button");
+        this.decreaseFontSizeButton = document.getElementById("decrease-font-size-button");
 
         this.setupEmojiButton();
         this.setupEmojiPicker();
         this.setupColorButton();
+        this.setupFontSizeButtons();
 
         this.editor = null;
     }
 
     init() {
         this.editor = ace.edit("code-editor");
-        this.editor.setOptions({
-            fontSize: "12pt"
-        });
+        // this.editor.setOptions({
+        //     // fontSize: "12pt"
+        // });
         this.editor.session.setMode("ace/mode/python");
     }
 
@@ -73,6 +76,18 @@ class Editor {
         this.colorButton.addEventListener('change', (e) => {
             const color = e.target.value.substring(3);
             this.editor.insert(color);
+        });
+    }
+
+    setupFontSizeButtons() {
+        this.increaseFontSizeButton.addEventListener("click", (e) => {
+            if (this.editor.getFontSize() >= 2)
+                this.editor.setFontSize(this.editor.getFontSize() + 1);
+        });
+
+        this.decreaseFontSizeButton.addEventListener("click", (e) => {
+            if (this.editor.getFontSize() >= 2)
+                this.editor.setFontSize(this.editor.getFontSize() - 1);
         });
     }
 
