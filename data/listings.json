@@ -2,7 +2,7 @@
   "0. 🐍 Tutorial": {
     "visual": "grid",
     "version": 1,
-    "code": "# Welcome to PyKidos! This is a quick-and-dirty Javascript application\n# that provides a Python playground running entirely in the browser, which\n# is convenient for teaching purposes. The grid on the left can be manipulated\n# from Python, the color and text in each cell can be set from Python.\n# PyKidos also supports grid animations, click and keyboard events.\n# Kids (and adults) can program toy games to learn basic Python coding skills.\n# You have a few examples on the left, and you can create your own scripts for\n# your kids or for yourself!\n\n# This Python script provides a quick tutorial. Press Control+Enter to run it.\n# You can download the script by clicking on Download at the bottom right. \n\n# The standard output is displayed in the bottom right panel.\nprint(\"Hello world!\")\n\n# Grid cells are 0-indexed. This is how you update a cell's color.\n# There are a few common colors predefined as global variables.\ncolor(0, 1, red)\n\n# You can resize the grid as follows (this will clear the grid first).\n# size(12, 12)\n\n# You can enter arbitrary colors as RGB triplets (numbers in 0-255). You can\n# use the color picker at the top.\nfor j in range(2, 5):\n    color(0, j, (255, 180, 5))\n\n# You can also write one short strings in cells.\ntext(0, 6, \"Hi!\")\n\n# Use the emoji selector at the top to write Unicode emojis.\ntext(0, 8, \"🍎\")\n\n# You can change the default size as follows:\n# font(12)\n\n# This function clears the grid:\n# clear()\n\n# This one fills all cells with a given color:\n# fill(black)\n\n# Some cell manipulation functions:\nline(9, yellow)\ncolumn(9, green)\nblock(2, 2, 7, 7, gray(200))\ndiagonal(0, gray(240))\n\n\n# Now, you can easily create animations by defining this special function:\nicon = \"🍎\"\ndef frame(idx):\n    # idx is the frame number: 0, 1, 2...\n    text((idx - 1) % 10, 8, \"\")\n    text(idx % 10, 8, icon)\n\n# You can modify the time interval between frames as follows:\ninterval = 0.2 # in seconds\n\n\n# You can react to cell clicks as follows:\ndef click(i, j):\n    print(f\"You clicked on cell {i, j}.\")\n\n\n# You can react to key presses as follows:\ndef keyboard(key):\n    # Press the Left key or Right key to change the moving fruit.\n    global icon\n    if key == \"ArrowLeft\":\n        icon = \"🍐\"\n    if key == \"ArrowRight\":\n        icon = \"🍓\"\n",
+    "code": "\"\"\"\nWelcome to PyKidos! This is a small Javascript application (still rough around \nthe edges) that provides a Python playground running entirely in the browser,\nwhich is convenient for teaching purposes.\n\nThe grid cells (color and text) on the left can be manipulated from Python.\nYou can make simple grid animations and react to click and keyboard events.\n\nKids (and adults) can program toy games to learn basic Python coding skills.\n\nYou have a few examples on the left, and you can create your own scripts for\nyour kids or for yourself!\n\"\"\"\n\n################################################################################\n# PRESS CONTROL + ENTER TO RUN THE SCRIPT\n################################################################################\n\n# The standard output is displayed in the bottom right panel.\nprint(\"Hello world!\")\n\n# Grid cells are 0-indexed. This is how you update a cell's color.\n# There are a few common colors predefined as global variables.\ncolor(0, 1, red)\n\n# You can resize the grid as follows (this will clear the grid first).\n# size(12, 12)\n\n# You can enter arbitrary colors as RGB triplets (numbers in 0-255). You can\n# use the color picker at the top.\nfor j in range(2, 5):\n    color(0, j, (255, 180, 5))\n\n# You can also write one short strings in cells.\ntext(0, 6, \"Hi!\")\n\n# Use the emoji selector at the top to write Unicode emojis.\ntext(0, 8, \"🍎\")\n\n# You can change the default size as follows:\n# font(12)\n\n# This function clears the grid:\n# clear()\n\n# This one fills all cells with a given color:\n# fill(black)\n\n# Some cell manipulation functions:\nline(9, yellow)\ncolumn(9, green)\nblock(2, 2, 7, 7, gray(200))\ndiagonal(0, gray(240))\n\n\n# Now, you can easily create animations by defining this special function:\nicon = \"🍎\"\ndef frame(idx):\n    # idx is the frame number: 0, 1, 2...\n    text((idx - 1) % 10, 8, \"\")\n    text(idx % 10, 8, icon)\n\n# You can modify the time interval between frames as follows:\ninterval = 0.2 # in seconds\n\n\n# You can react to cell clicks as follows:\ndef click(i, j):\n    print(f\"You clicked on cell {i, j}.\")\n\n\n# You can react to key presses as follows:\ndef keyboard(key):\n    # Press the Left key or Right key to change the moving fruit.\n    global icon\n    if key == \"ArrowLeft\":\n        icon = \"🍐\"\n    if key == \"ArrowRight\":\n        icon = \"🍓\"\n",
     "lang": "fr",
     "data": {
       "rows": 10,
@@ -260,10 +260,6 @@
           ],
           "text": ""
         },
-        "5,8": {
-          "bgcolor": null,
-          "text": "🍎"
-        },
         "5,9": {
           "bgcolor": [
             80,
@@ -327,6 +323,10 @@
             240
           ],
           "text": ""
+        },
+        "7,8": {
+          "bgcolor": null,
+          "text": "🍎"
         },
         "7,9": {
           "bgcolor": [
@@ -433,7 +433,7 @@
           "text": ""
         }
       },
-      "fontSize": "10pt"
+      "fontSize": "16pt"
     }
   },
   "1. 🔳 Checkerboard": {
