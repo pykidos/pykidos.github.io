@@ -150,7 +150,7 @@ emoji-picker.visible {
 /*************************************************************************************************/
 
 #code-editor {
-    height: 100%;
+    height: calc(100% - 25px);
 }
 
 
@@ -249,4 +249,12 @@ emoji-picker.visible {
     max-height: 20px;
     padding: 0;
     margin: 0;
+}
+
+#credits {
+    flex-direction: column;
+}
+
+#credits p {
+    padding: 2px 0;
 }
