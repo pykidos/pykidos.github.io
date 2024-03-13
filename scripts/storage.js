@@ -101,6 +101,9 @@ class Storage {
     }
 
     rename(oldName, newName) {
+        // NOTE: without this, the code listing is erased.
+        if (oldName == newName) return;
+
         if (oldName.startsWith("__")) {
             console.error("Listing name cannot start with __");
             return null;
@@ -139,7 +142,7 @@ class Storage {
             return listing;
         }
         else {
-            throw new Error(`Listing "${name}" not found.`);
+            console.error(`Listing "${name}" not found.`);
         }
     }
 

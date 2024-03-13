@@ -126,6 +126,12 @@ class Selector {
         // try {
         let listing = this.model.storage.retrieve(name);
 
+        // Handle the case where the code could not be retrieved.
+        if (!listing) {
+            this._updateAndSelect(this.model.storage.first());
+            return;
+        }
+
         // Get the code in the listing object.
         let code = listing.code;
 
@@ -157,6 +163,8 @@ class Selector {
 
     rename(oldName, newName) {
         if (!newName) return;
+        if (oldName == newName) return;
+
         console.log(`Rename code listing from "${oldName}" to "${newName}".`);
 
         // Rename the item in the storage.
