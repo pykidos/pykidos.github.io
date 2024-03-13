@@ -11,12 +11,10 @@ class Spinner {
         this.model = model;
         this.dispatcher = dispatcher;
 
-        // this.isSpinning = false;
         this.setupDispatcher();
     }
 
     setSpinning(isSpinning) {
-        // this.isSpinning = isSpinning;
         if (isSpinning)
             document.body.classList.add('waiting');
         else

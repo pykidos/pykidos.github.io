@@ -17,6 +17,7 @@ class Runner {
 
         this.pyodide = null;
         this.globals = null;
+        this.hasGlobals = false;
         this.outputElement = document.getElementById("terminal-output");
 
         this.interval = DEFAULT_INTERVAL;
@@ -61,6 +62,7 @@ class Runner {
 
         // Clear the global variables.
         this.globals = this.pyodide.toPy({});
+        this.hasGlobals = false;
     }
 
     clearGrid() {
@@ -200,6 +202,7 @@ class Runner {
 
         // Run the code.
         let out = await this._run(code);
+        this.hasGlobals = true;
 
         // If there is a frame function, start the animation.
         this.tryPlay();
@@ -247,14 +250,22 @@ class Runner {
     /* Input events                                                                              */
     /*********************************************************************************************/
 
+    _firstRun() {
+        // Run the code if it hasn't run yet.
+        if (!this.hasGlobals) {
+            const code = this.model.editor.getCode();
+            this.start(code);
+        }
+    }
+
     click(row, col) {
-        // console.log("click", row, col);
+        this._firstRun();
         if (this.has("click"))
             this._run(`click(${row}, ${col})`, false, false, false, false);
     }
 
     keyboard(key) {
-        // console.log("keyboard", key);
+        this._firstRun();
         if (this.has("keyboard"))
             this._run(`keyboard("${key}")`, false, false, false, false);
     }
