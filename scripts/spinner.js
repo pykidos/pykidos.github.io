@@ -15,10 +15,12 @@ class Spinner {
     }
 
     setSpinning(isSpinning) {
-        if (isSpinning)
+        if (isSpinning) {
             document.body.classList.add('waiting');
-        else
+        }
+        else {
             document.body.classList.remove('waiting');
+        }
     }
 
     setupDispatcher() {

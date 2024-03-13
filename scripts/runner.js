@@ -26,12 +26,18 @@ class Runner {
     }
 
     async init() {
+        // Start the spinning cursor.
+        this.dispatcher.spinning(this, true);
+
         this.pyodide = await loadPyodide();
         this.pyodide.setStdout({
             batched: (text) => {
                 this.stdout(text);
             }
         });
+
+        // Stop the spinning cursor.
+        this.dispatcher.spinning(this, false);
     }
 
     /* Setup functions                                                                           */

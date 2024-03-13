@@ -34,6 +34,7 @@ class App {
     init() {
         this.model.init().then(async () => {
             this.selector.init();
+            await this.runner.init();
         });
     }
 };

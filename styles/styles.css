@@ -246,7 +246,7 @@ emoji-picker.visible {
 #credits * {
     color: #999;
     font-size: 9pt;
-    max-height: 20px;
+    max-height: 30px;
     padding: 0;
     margin: 0;
 }
