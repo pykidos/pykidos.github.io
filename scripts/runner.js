@@ -256,22 +256,26 @@ class Runner {
     /* Input events                                                                              */
     /*********************************************************************************************/
 
-    _firstRun() {
+    async _firstRun() {
         // Run the code if it hasn't run yet.
         if (!this.hasGlobals) {
+            this.clearOutput();
+            this.clearGrid();
+
             const code = this.model.editor.getCode();
-            this.start(code);
+            await this._run(code);
+            this.hasGlobals = true;
         }
     }
 
-    click(row, col) {
-        this._firstRun();
+    async click(row, col) {
+        await this._firstRun();
         if (this.has("click"))
             this._run(`click(${row}, ${col})`, false, false, false, false);
     }
 
-    keyboard(key) {
-        this._firstRun();
+    async keyboard(key) {
+        await this._firstRun();
         if (this.has("keyboard"))
             this._run(`keyboard("${key}")`, false, false, false, false);
     }
