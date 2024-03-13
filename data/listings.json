@@ -3191,11 +3191,13 @@
   "5. 🐰 Bunny": {
     "visual": "grid",
     "version": 1,
-    "code": "n = 7\nsize(n, n)\nfont(32)\n\nd = {\n    \"ArrowRight\": (0, +1),\n    \"ArrowLeft\": (0, -1),\n    \"ArrowUp\": (-1, 0),\n    \"ArrowDown\": (+1, 0),\n}\n\nbunny = 1, 3\ncarrot = (5, 6)\n\ndef show():\n    clear()\n    block(3, 2, 4, n, black)\n    text(*bunny, \"🐰\")\n    if bunny != carrot:\n        text(*carrot, \"🥕\")\n    else:\n        print(\"You win!\")\n\ndef keyboard(key):\n    global bunny\n    i, j = bunny\n    \n    dd = d.get(key, None)\n    if dd:\n        di, dj = dd\n        i += di\n        j += dj\n        i = max(0, min(i, n-1))\n        j = max(0, min(j, n-1))\n        if color(i, j) != (0, 0, 0):\n            bunny = (i, j)\n    show()\n\nshow()\n",
+    "code": "n = 7\nsize(n, n)\nfont(32)\n\nd = {\n    \"ArrowRight\": (0, +1),\n    \"ArrowLeft\": (0, -1),\n    \"ArrowUp\": (-1, 0),\n    \"ArrowDown\": (+1, 0),\n}\n\nbunny = 1, 3\ncarrot = (5, 6)\n\ndef show():\n    clear()\n    block(3, 2, 4, n, black)\n    text(*bunny, \"🐰\")\n    if bunny != carrot:\n        text(*carrot, \"🥕\")\n    else:\n        print(\"Yummy!\")\n\ndef keyboard(key):\n    global bunny\n    i, j = bunny\n    \n    dd = d.get(key, None)\n    if dd:\n        di, dj = dd\n        i += di\n        j += dj\n        i = max(0, min(i, n-1))\n        j = max(0, min(j, n-1))\n        if color(i, j) != (0, 0, 0):\n            bunny = (i, j)\n    show()\n\nprint(\"Press the keyboard arrows to move the bunny toward the carrot.\")\n\nshow()\n",
     "lang": "fr",
     "data": {
+      "rows": 7,
+      "cols": 7,
       "cells": {
-        "1,3": {
+        "0,5": {
           "bgcolor": null,
           "text": "🐰"
         },
@@ -3244,8 +3246,7 @@
           "text": "🥕"
         }
       },
-      "rows": 7,
-      "cols": 7
+      "fontSize": "32pt"
     }
   }
 }
