@@ -11,13 +11,17 @@ Kids (and adults) can program toy games to learn basic Python coding skills.
 
 ## Gallery
 
-![Tic-tac-toe](https://github.com/pykidos/pykidos.github.io/assets/1942359/e10e28d9-78d7-469a-83f9-837b2fd98063)
 
-![Bunny](https://github.com/pykidos/pykidos.github.io/assets/1942359/46be385c-2dc3-4874-8539-225109480bfd)
+![Bunny](https://github.com/pykidos/pykidos.github.io/assets/1942359/b2bd0f47-673b-456c-ad32-a72cd814e779)
 
-![Game of life](https://github.com/pykidos/pykidos.github.io/assets/1942359/65ae501f-3144-4170-8429-4d807398b920)
+![Tic-tac-toe](https://github.com/pykidos/pykidos.github.io/assets/1942359/dcdbfadb-efae-488d-9172-017818e7c9c2)
 
-![Antialiased disc](https://github.com/pykidos/pykidos.github.io/assets/1942359/f39e1046-b163-428a-91a6-a05887a37b00)
+![Game of life](https://github.com/pykidos/pykidos.github.io/assets/1942359/cb6d6b3d-3f1c-49c0-ae49-86ca45835c8f)
+
+![Checkerboard](https://github.com/pykidos/pykidos.github.io/assets/1942359/d770ec45-5c6d-4611-af5d-4814f1514d41)
+
+
+<!-- ![Antialiased disc](https://github.com/pykidos/pykidos.github.io/assets/1942359/f39e1046-b163-428a-91a6-a05887a37b00) -->
 
 More images to come soon (pull requests welcome).
 
