@@ -24,7 +24,6 @@ class Editor {
     init() {
         this.editor = ace.edit("code-editor");
         // this.editor.setOptions({
-        //     // fontSize: "12pt"
         // });
         this.editor.session.setMode("ace/mode/python");
     }

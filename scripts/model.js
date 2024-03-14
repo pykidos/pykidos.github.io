@@ -24,9 +24,20 @@ class Model {
         await this.storage.init();
         await this.editor.init();
         await this.grid.init();
+
+        // Load editor's font size.
+        let fontSize = this.storage.loadMetadata("__editorFontSize__");
+        fontSize = parseInt(fontSize);
+        if (fontSize) {
+            this.editor.editor.setFontSize(fontSize);
+        }
     }
 
     save(name) {
+        // Save editor's font size.
+        this.storage.storeMetadata(
+            "__editorFontSize__", parseInt(this.editor.editor.getFontSize()));
+
         console.log(`Saving code listing: "${name}".`);
         const code = this.editor.getCode();
         const lang = LANG;
