@@ -56,6 +56,7 @@ button:hover {
 }
 
 .left-panel {
+    display: block;
     width: 250px;
     flex-shrink: 0;
 }
@@ -84,34 +85,32 @@ button:hover {
 
 
 /*************************************************************************************************/
-/* Top buttons                                                                                   */
+/* Hamburger menu                                                                                */
 /*************************************************************************************************/
 
-#buttons-bar {
-    position: relative;
-    margin-bottom: 10px;
+.hamburger-menu {
+    cursor: pointer;
+    padding: 10px;
+    background: white;
 }
 
-#emoji-button {
-    text-decoration: none;
-    font-size: 14pt;
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
 }
 
-emoji-picker {
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 100;
+/* Collapse left panel on mobile devices */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none;
+    }
 }
 
-emoji-picker.visible {
-    display: block;
-}
-
-#color-button {
-    width: 150px;
-}
+/* #new-item {
+    border: 0;
+} */
 
 
 /*************************************************************************************************/
@@ -156,6 +155,37 @@ emoji-picker.visible {
 
 .icon {
     margin-right: 10px;
+}
+
+
+/*************************************************************************************************/
+/* Top buttons                                                                                   */
+/*************************************************************************************************/
+
+#buttons-bar {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#emoji-button {
+    text-decoration: none;
+    font-size: 14pt;
+}
+
+emoji-picker {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+emoji-picker.visible {
+    display: block;
+}
+
+#color-button {
+    width: 150px;
 }
 
 
@@ -240,6 +270,20 @@ emoji-picker.visible {
 }
 
 
+/*************************************************************************************************/
+/* Confidentiality                                                                               */
+/*************************************************************************************************/
+
+#confidentiality {
+    font-size: 9pt;
+    color: #999;
+    padding: 0;
+    margin: 0;
+    display: block;
+    max-height: 45px;
+    overflow: hidden;
+}
+
 
 /*************************************************************************************************/
 /* Credits                                                                                       */
@@ -255,7 +299,7 @@ emoji-picker.visible {
 }
 
 #credits {
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 #credits p {

@@ -33,15 +33,31 @@
     <div id="dispatcher"></div>
     <div class="container">
 
-        <!-- SELECTOR -->
-        <div class="panel left-panel">
-            <!-- NEW BUTTON -->
-            <div id="new-item" class="item">New</div>
-            <div id="selector">
-            </div>
+
+        <!-- HAMBURGER BUTTON -->
+        <div id="menu-toggle" class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
 
+        <!-- LEFT PANEL -->
+        <div class="panel left-panel">
+
+            <!-- NEW BUTTON -->
+            <div id="new-item" class="item">New</div>
+
+            <!-- SELECTOR -->
+            <div id="selector">
+            </div>
+
+        </div>
+
+
+        <!-- MIDDLE PANEL -->
         <div class="panel middle-panel">
+
+            <!-- BUTTONS BAR -->
             <div id="buttons-bar">
 
                 <!-- EMOJI BUTTON -->Emoji
@@ -52,7 +68,7 @@
                 Color
                 <input type="text" data-coloris id="color-button" value="rgb(0,0,0)">
                 —
-                <button id="increase-font-size-button" title="Increase editor's font size">🗚</button><button id="decrease-font-size-button" title="Decrease editor's font size">🗛</button>
+                <button id="decrease-font-size-button" title="Decrease editor's font size">🗛</button><button id="increase-font-size-button" title="Increase editor's font size">🗚</button>
 
                 <!-- EMOJI PICKER POPUP -->
                 <emoji-picker id="emoji-picker" class="light"></emoji-picker>
@@ -64,9 +80,11 @@
 
         </div>
 
+
+        <!-- RIGHT PANEL -->
         <div class="panel right-panel">
 
-            <!-- GRID -->
+            <!-- GRID VISUAL COMPONENT -->
             <div class="subpanel">
                 <div id="grid">
                     <div id="grid-table" tabindex="0">
@@ -75,10 +93,10 @@
 
             </div>
 
-            <!-- OUTPUT -->
+            <!-- OUTPUT TERMINAL -->
             <textarea readonly class="subpanel" id="terminal-output"></textarea>
 
-            <!-- PANEL -->
+            <!-- CONTROL PANEL -->
             <div class="subpanel control-panel">
                 <button id="run-button" title="Play/Stop (Control + Enter)">&#9658;</button>
 
@@ -88,21 +106,24 @@
                 <button id="download-button" title="Download the Python script locally">Download</button>
             </div>
 
-            <!-- PANEL -->
-            <div class="subpanel" id="credits">
-                <p>
-                    Your code is stored locally in your browser's local storage.
-                    It is never sent to any server.
-                    Backup your data with the Download button.
-                </p>
-                <p>
-                    <a href="https://pykidos.github.io">PyKidos</a> —
-                    <a href="https://cyrille.rossant.net/">Cyrille Rossant</a> —
-                    <a href="https://github.com/pykidos/pykidos.github.io">GitHub repo</a> —
-                    2024
-                </p>
+            <!-- CONFIDENTIALITY -->
+            <div class="subpanel" id="confidentiality">
+                Your code is stored locally in your browser's local storage.
+                It is never sent to any server.
+                Backup your data with the Download button.
             </div>
+
+            <!-- CREDITS -->
+            <div class="subpanel" id="credits">
+                <a href="https://pykidos.github.io">PyKidos</a> —
+                <a href="https://cyrille.rossant.net/">Cyrille Rossant</a> —
+                <a href="https://github.com/pykidos/pykidos.github.io">GitHub repo</a> —
+                2024
+            </div>
+
         </div>
+
+
     </div>
 </body>
 

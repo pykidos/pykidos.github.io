@@ -13,10 +13,12 @@ class Selector {
 
         this.el = document.getElementById("selector");
         this.newButton = document.getElementById("new-item");
+        this.menuButton = document.getElementById('menu-toggle');
 
         this.names = [];
         this.setupDispatcher();
         this.setupNewButton();
+        this.setupMenuButton();
     }
 
     init() {
@@ -40,6 +42,13 @@ class Selector {
 
     setupNewButton() {
         this.newButton.addEventListener('click', (e) => { this.new(); });
+    }
+
+    setupMenuButton() {
+        const left = document.querySelector('.left-panel');
+        this.menuButton.addEventListener('click', function () {
+            left.style.display = left.style.display == "none" ? "block" : "none";
+        });
     }
 
     /* Internal functions                                                                        */
