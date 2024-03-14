@@ -14,7 +14,7 @@ export const DEFAULT_VERSION = 1;
 export const HEADER = (locale) => `
 import js
 
-# Python "pointer" to the Grid Javascript object.
+# Python "pointer" to the Grid JavaScript object.
 grid = js.window.app.model.grid
 
 # Colors.
