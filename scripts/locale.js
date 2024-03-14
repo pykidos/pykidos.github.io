@@ -32,14 +32,16 @@ export const LOCALIZATION = {
 
 
 function getLang() {
-    return navigator.language.split('-')[0];
+    // return navigator.language.split('-')[0];
+    // NOTE: full localization support will be implemented and tested later :)
+    return "en";
 }
 
 export function getLocale(lang = null) {
     // Without argument, return {key: key} (ie default english locale)
     // Otherwise, return {key: translation}.
 
-    if (lang) return LOCALIZATION[lang];
+    if (lang && LOCALIZATION[lang]) return LOCALIZATION[lang];
 
     // Create "X": "X" for the default "en" language.
     let locale = {};
@@ -51,7 +53,7 @@ export function addLocale(locale) {
     let result = '';
     for (const key in locale) {
         if (Object.hasOwnProperty.call(locale, key)) {
-            result += `${locale[key]} = globals().get("${key}", None)\n`;
+            result += `${locale[key]} = globals().get("${key}", print)\n`;
         }
     }
     return result;
