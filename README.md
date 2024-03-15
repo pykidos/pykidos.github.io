@@ -1,6 +1,6 @@
 # PyKidos: Python visual playground in the browser
 
-Welcome to [**PyKidos**](https://pykidos.github.io/), a small Javascript application (still rough around the edges) that offers a Python playground for teaching purposes. It is mainly intended for use by adults who are teaching programming to their kids, and it is not really designed for independent use by children without adult supervision.
+Welcome to [**PyKidos**](https://pykidos.github.io/), a small JavaScript application (still rough around the edges) that offers a Python playground for teaching purposes. It is mainly intended for use by adults who are teaching programming to their kids, and it is not really designed for independent use by children without adult supervision.
 
 [![PyKidos](https://github.com/pykidos/pykidos.github.io/assets/1942359/7974ace5-aeb6-4a6c-8678-c40ed5eb0af0)](https://pykidos.github.io/)
 
@@ -35,7 +35,7 @@ More screenshots to come soon (pull requests welcome).
 
 ## Development notes
 
-The code is written in custom HTML, CSS, vanilla Javascript.
+The code is written in custom HTML, CSS, vanilla JavaScript.
 
 The code uses the following external components:
 
