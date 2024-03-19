@@ -29,11 +29,8 @@ class Grid {
 
     _createCell(i) {
         let cell = document.createElement('div');
-        let row = Math.floor(i / this.rows);
-        let col = i % this.rows;
-        cell.addEventListener("click", (e) => {
-            if (this._onClick) this._onClick(row, col);
-        });
+        let row = Math.floor(i / this.cols);
+        let col = i % this.cols;
         cell.title = `${row}, ${col}`;
         this.gridTable.appendChild(cell);
     }
@@ -46,6 +43,13 @@ class Grid {
         this._onKeyboard = null;
         this.gridTable.addEventListener("keydown", (e) => {
             if (this._onKeyboard) this._onKeyboard(e.key);
+        });
+
+        this.gridTable.addEventListener("click", (e) => {
+            let coords = e.target.title;
+            let [row, col] = coords.split(", ").map(Number);
+            console.log(`Clicked on cell: (${row}, ${col}).`);
+            if (this._onClick) this._onClick(row, col);
         });
     }
 
@@ -111,8 +115,11 @@ class Grid {
     cell(i, j) {
         i = Math.floor(i);
         j = Math.floor(j);
-        if (0 <= i && i < this.rows && 0 <= j && j < this.cols)
-            return this.gridTable.children[i * this.rows + j];
+        let cell = null;
+        if (0 <= i && i < this.rows && 0 <= j && j < this.cols) {
+            cell = this.gridTable.children[i * this.cols + j];
+        }
+        return cell;
     }
 
     bgcolor(i, j, r, g, b) {
