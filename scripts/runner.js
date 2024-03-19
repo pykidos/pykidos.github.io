@@ -210,6 +210,8 @@ class Runner {
         let out = await this._run(code);
         this.hasGlobals = true;
 
+        this.model.grid.gridTable.focus();
+
         // If there is a frame function, start the animation.
         this.tryPlay();
 
